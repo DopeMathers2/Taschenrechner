@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane id="display-grid" fx:id="displayGrid" gridLinesVisible="true" minHeight="430.0" minWidth="400.0" prefHeight="430.0" prefWidth="400.0" stylesheets="@styles/taschenrechner-darkmode.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dopemathers.taschenrechner.UserInputs">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="341.0" minHeight="10.0" prefHeight="341.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TextField id="calcDisplay" fx:id="calcDisplay" prefHeight="52.0" prefWidth="314.0" stylesheets="@styles/taschenrechner-darkmode.css">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <GridPane id="buttonGrid" fx:id="buttonGrid" stylesheets="@styles/taschenrechner-darkmode.css" GridPane.rowIndex="1">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button id="plusButton" fx:id="plusButton" mnemonicParsing="false" onAction="#bPlusPressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%plus-button">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="minusButton" fx:id="minusButton" mnemonicParsing="false" onAction="#bMinusPressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%minus-button" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="multiplyButton" fx:id="multiplyButton" mnemonicParsing="false" onAction="#bMultiplyPressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%multiply-button" GridPane.columnIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="divButton" fx:id="divButton" mnemonicParsing="false" onAction="#bDivPressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%div-button" GridPane.columnIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="oneButton" fx:id="oneButton" mnemonicParsing="false" onAction="#b1Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%one-button" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="twoButton" fx:id="twoButton" mnemonicParsing="false" onAction="#b2Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%two-button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="threeButton" fx:id="threeButton" mnemonicParsing="false" onAction="#b3Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%three-button" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="fourButton" fx:id="fourButton" mnemonicParsing="false" onAction="#b4Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%four-button" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="fiveButton" fx:id="fiveButton" mnemonicParsing="false" onAction="#b5Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%five-button" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="sixButton" fx:id="sixButton" mnemonicParsing="false" onAction="#b6Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%six-button" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="nineButton" fx:id="nineButton" mnemonicParsing="false" onAction="#b9Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%nine-button" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="sevenButton" fx:id="sevenButton" mnemonicParsing="false" onAction="#b7Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%seven-button" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="aightButton" fx:id="aightButton" mnemonicParsing="false" onAction="#b8Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%aight-button" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="pointButton" fx:id="pointButton" mnemonicParsing="false" onAction="#bPunktPressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%punkt-button" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="zeroButton" fx:id="zeroButton" mnemonicParsing="false" onAction="#b0Pressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%zero-button" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="enterButton" fx:id="enterButton" mnemonicParsing="false" onAction="#bEnterPressed" prefHeight="232.0" prefWidth="52.0" stylesheets="@styles/taschenrechner-darkmode.css" text="%enter-button" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>
