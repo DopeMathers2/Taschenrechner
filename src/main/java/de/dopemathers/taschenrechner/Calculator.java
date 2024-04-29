@@ -27,6 +27,7 @@ public class Calculator extends Application
     {
         FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
 
+        //noinspection deprecation
         fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale("de", "DE")));
         bundle = fxmlLoader.getResources();
 
