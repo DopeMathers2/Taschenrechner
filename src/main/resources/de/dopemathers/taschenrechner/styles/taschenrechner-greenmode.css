@@ -1,0 +1,60 @@
+.root
+{
+    -fx-background-color: #696969;
+        -fx-background-color:
+            #696969,
+            linear-gradient(#696969 0%, #c9c9c9 20%, #f9f9f9 100%),
+            linear-gradient(#696969, #333333),
+            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+        -fx-font-family: "Comic Sans MS";
+}
+
+.button
+{
+    -fx-background-color:
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5em;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 18px;
+    -fx-padding: 10 20 10 20;
+}
+
+.text-field
+{
+	-fx-accent: #151515;
+	-fx-background-color:   #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+	-fx-background-insets: 0 0 -1 0,0,1;
+        -fx-background-radius: 8,8,4;
+        -fx-padding: 15 15 15 15;
+    -fx-text-fill: white;
+        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+        -fx-font-family: "Comic Sans MS";
+        -fx-text-fill: linear-gradient(white, #d0d0d0);
+        -fx-font-size: 20px;
+}
+
+.text-field:focused
+{
+	-fx-background-color:   #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-text-fill: white;
+        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+        -fx-font-family: "Comic Sans MS";
+        -fx-text-fill: linear-gradient(white, #d0d0d0);
+        -fx-font-size: 20px;
+    -fx-background-insets: 0 0 -1 0,0,1;
+         -fx-background-radius: 8,8,2;
+         -fx-padding: 15 15 15 15;
+}

@@ -2,6 +2,7 @@ package de.dopemathers.taschenrechner;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.ResourceBundle;
@@ -9,6 +10,11 @@ import java.util.ResourceBundle;
 public class UserInputs
 {
 
+
+        private String sC = "N";
+        private String pMMD;
+        private String varOne;
+        private String varTwo;
 
         //init all Controls + Language bundle
         @FXML
@@ -49,7 +55,38 @@ public class UserInputs
         Button escButton; /* to implement */
         @FXML
         TextField calcDisplay;
+        @FXML
+        Label tempDisplay;
 
+
+
+        @FXML
+        public void onPMMDPressed(String mathsign)
+        {
+            sC = mathsign;
+
+            switch (sC)
+        {
+            case "+":
+
+                break;
+
+            case "-":
+
+                break;
+
+            case "*":
+
+                break;
+
+            case "/":
+
+                break;
+
+        }
+
+
+        }
 
         //Buttons pressed methods
         @FXML
@@ -138,28 +175,65 @@ public class UserInputs
         public void bPlusPressed()
         {
             String temp = calcDisplay.getText();
+            varOne = temp;
             calcDisplay.setText(temp+ bundle.getString("plus-button"));
+            pMMD = bundle.getString("plus-button");
+            onPMMDPressed(pMMD);
+
+            tempDisplay.setText(varOne + " " + pMMD + " ");
+
+            //test
+            System.out.println("varOne ist: " + varOne);
+            System.out.println("pMMD ist: " + pMMD);
+            System.out.println("varTwo ist: " + varTwo);
         }
 
         @FXML
         public void bMinusPressed()
         {
             String temp = calcDisplay.getText();
+            varOne = temp;
             calcDisplay.setText(temp+ bundle.getString("minus-button"));
+            pMMD = bundle.getString("minus-button");
+            onPMMDPressed(pMMD);
+
+
+            //test
+            System.out.println("varOne ist: " + varOne);
+            System.out.println("pMMD ist: " + pMMD);
+            System.out.println("varTwo ist: " + varTwo);
         }
 
         @FXML
         public void bMultiplyPressed()
         {
             String temp = calcDisplay.getText();
+            varOne = temp;
             calcDisplay.setText(temp+ bundle.getString("multiply-button"));
+            pMMD = bundle.getString("multiply-button");
+            onPMMDPressed(pMMD);
+
+
+            //test
+            System.out.println("varOne ist: " + varOne);
+            System.out.println("pMMD ist: " + pMMD);
+            System.out.println("varTwo ist: " + varTwo);
         }
 
         @FXML
         public void bDivPressed()
         {
             String temp = calcDisplay.getText();
+            varOne = temp;
             calcDisplay.setText(temp+ bundle.getString("div-button"));
+            pMMD = bundle.getString("div-button");
+            onPMMDPressed(pMMD);
+
+
+            //test
+            System.out.println("varOne ist: " + varOne);
+            System.out.println("pMMD ist: " + pMMD);
+            System.out.println("varTwo ist: " + varTwo);
         }
 
         @FXML
