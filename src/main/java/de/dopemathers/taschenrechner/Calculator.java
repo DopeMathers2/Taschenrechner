@@ -28,7 +28,7 @@ public class Calculator extends Application
         FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
 
         //noinspection deprecation
-        fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale("en", "EN")));
+        fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale("de", "DE")));
         bundle = fxmlLoader.getResources();
 
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
@@ -46,6 +46,7 @@ public class Calculator extends Application
 
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args)

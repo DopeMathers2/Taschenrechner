@@ -1,9 +1,12 @@
 package de.dopemathers.taschenrechner;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.util.ResourceBundle;
 
@@ -61,8 +64,16 @@ public class UserInputs
         TextField calcDisplay;
         @FXML
         Label tempDisplay;
+        @FXML
+        MenuItem close;
 
+        @FXML
+        private void onClosePressed()
+        {
 
+            tempDisplay.getScene().getWindow().t
+
+        }
 
         @FXML
         public void onPMMDPressed(String mathsign)
