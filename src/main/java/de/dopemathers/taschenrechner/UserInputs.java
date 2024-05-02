@@ -16,13 +16,24 @@ public class UserInputs
 
 
         private String sC = "N";
+
+        //Mathelogic Variables
         private String pMMD;
+        private boolean pMMDTriggered = false;
+
         private String varOne;
         private boolean varOneTriggered = false;
+
         private String varTwo;
         private boolean varTwoTriggered = false;
+
         private String firstSign;
         private boolean firstSignTriggered = false;
+
+        private String result;
+        private boolean enterTriggered = false;
+
+        private boolean escTriggered = false;
 
         //init all Controls + Language bundle
         @FXML
@@ -153,38 +164,62 @@ public class UserInputs
 
         }
 
-        private void firstSignIsTriggered()
+        private boolean isDigit(String num)
         {
-            if(firstSignTriggered == false) {
-                if (calcDisplay.getText().equalsIgnoreCase("+"))
-                {
-                    firstSign = "+";
-                    firstSignTriggered = true;
-                }
-                else if (calcDisplay.getText().equalsIgnoreCase("*"))
-                {
-                    firstSign = "+";
-                    firstSignTriggered = true;
-                }
-                else if (calcDisplay.getText().equalsIgnoreCase("/"))
-                {
-                    firstSign = "+";
-                    firstSignTriggered = true;
-                }
-                else if (calcDisplay.getText().equalsIgnoreCase("-"))
-                {
-                    firstSign = "-";
-                    firstSignTriggered = true;
-                }
-                else
-                {
+            if(num.equalsIgnoreCase("1") || num.equalsIgnoreCase("2")
+                    || num.equalsIgnoreCase("3") || num.equalsIgnoreCase("4")
+                    || num.equalsIgnoreCase("5") || num.equalsIgnoreCase("6")
+                    || num.equalsIgnoreCase("7") || num.equalsIgnoreCase("8")
+                    || num.equalsIgnoreCase("9") || num.equalsIgnoreCase("0"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-                }
+        }
+
+        private boolean isPoint(String num)
+        {
+            if (num.equalsIgnoreCase(".") || num.equalsIgnoreCase(","))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private boolean isMathsign(String num)
+        {
+            if(num.equalsIgnoreCase("+") || num.equalsIgnoreCase("-")
+                    || num.equalsIgnoreCase("*") || num.equalsIgnoreCase("/"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private boolean isEnter(String num)
+        {
+            if (num.equalsIgnoreCase("="))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
         /*Buttons pressed methods
-         Wenn button gedrückt wird muss entschieden werden ob Minus oder Plus als vorzeichen stehen -> Sollte Nutzer hier etwas falsches eingeben sollte von + ausgegangen werden.
+         Wenn button gedrückt wird muss entschieden werden ob Minus oder Plus als vorzeichen stehen -> Sollte Nutzer hier etwas falsches eingeben sollte von + ausgegangen werden, der Bildschrim gelöscht werden und der Test von Vorne beginnen bis Nutzer eine Zahl eingibt.
          Sobald ein Vorzeichen eingetragen wurde muss dies festgehalten werden und das vorzeichen muss gespeichert werden -> varFirstSign firstSignTriggered
          Danach muss gecheckt werden ob bereits ein Vorzeichen gespeichert wurde (firstSignTriggered == true), hiernach muss eine Zahl folgen also muss geprüft werden ob die nächste zahl wirklich eine Zahl ist. -> Sollte es nicht Zahl oder Komma (sofern kommaIsTriggered = false) sein so muss das Zeichen gelöscht werden (außnahme Mathezeichen da dies eine neue Variable einleitet)
          Ist dies erledigt muss die erste Zahl in der ersten Variablen gespeichert werden -> varOne
@@ -203,19 +238,62 @@ public class UserInputs
         @FXML
         public void b1Pressed()
         {
-            firstSignIsTriggered();
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
+
+            if(firstSignTriggered)
+            {
+                if (varOneTriggered)
+                {
+                    if (pMMDTriggered)
+                    {
+                        if (varTwoTriggered)
+                        {
+                            if (enterTriggered)
+                            {
+
+                            }
+                            else
+                            {
+                                varTwo = varTwo + "1";
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+
+                }
+            }
+            else if(isDigit(temp))
+            {
+
+            }
+            else if (isPoint(temp))
+            {
+
+            }
+            else
+            {
+
+            }
+
             calcDisplay.setText(temp+ bundle.getString("one-button"));
+
+
         }
 
         @FXML
         public void b2Pressed()
         {
              String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
              calcDisplay.setText(temp+ bundle.getString("two-button"));
         }
 
@@ -223,8 +301,6 @@ public class UserInputs
         public void b3Pressed()
         {
            String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
            calcDisplay.setText(temp+ bundle.getString("three-button"));
         }
 
@@ -232,8 +308,6 @@ public class UserInputs
         public void b4Pressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             calcDisplay.setText(temp+ bundle.getString("four-button"));
         }
 
@@ -241,8 +315,6 @@ public class UserInputs
         public void b5Pressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             calcDisplay.setText(temp+ bundle.getString("five-button"));
         }
 
@@ -250,8 +322,6 @@ public class UserInputs
         public void b6Pressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             calcDisplay.setText(temp+ bundle.getString("six-button"));
         }
 
@@ -259,8 +329,6 @@ public class UserInputs
         public void b7Pressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             calcDisplay.setText(temp+ bundle.getString("seven-button"));
         }
 
@@ -268,8 +336,6 @@ public class UserInputs
         public void b8Pressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             calcDisplay.setText(temp+ bundle.getString("aight-button"));
         }
 
@@ -277,8 +343,6 @@ public class UserInputs
         public void b9Pressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             calcDisplay.setText(temp+ bundle.getString("nine-button"));
         }
 
@@ -286,8 +350,6 @@ public class UserInputs
         public void b0Pressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             calcDisplay.setText(temp+ bundle.getString("zero-button"));
         }
 
@@ -306,10 +368,7 @@ public class UserInputs
         @FXML
         public void bPlusPressed()
         {
-            firstSignIsTriggered();
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             varOne = temp;
             calcDisplay.setText(bundle.getString("plus-button"));
             pMMD = bundle.getString("plus-button");
@@ -327,8 +386,6 @@ public class UserInputs
         public void bMinusPressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             varOne = temp;
             calcDisplay.setText(bundle.getString("minus-button"));
             pMMD = bundle.getString("minus-button");
@@ -345,8 +402,6 @@ public class UserInputs
         public void bMultiplyPressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             varOne = temp;
             calcDisplay.setText(bundle.getString("multiply-button"));
             pMMD = bundle.getString("multiply-button");
@@ -363,8 +418,6 @@ public class UserInputs
         public void bDivPressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
-            deleteDisplay(temp);
             varOne = temp;
             calcDisplay.setText(bundle.getString("div-button"));
             pMMD = bundle.getString("div-button");
@@ -381,38 +434,7 @@ public class UserInputs
         public void bPunktPressed()
         {
             String temp = calcDisplay.getText();
-            calcDisplay.setText("");
             calcDisplay.setText(temp+ bundle.getString("point"));
-        }
-
-
-        private String deleteDisplay(String temp)
-        {
-            if (calcDisplay.getText() == "+")
-            {
-                temp = "";
-                return temp;
-            }
-            else if (calcDisplay.getText() == "*")
-            {
-                temp = "";
-                return temp;
-            }
-            else if (calcDisplay.getText() == "-")
-            {
-                temp = "";
-                return temp;
-            }
-            else if (calcDisplay.getText() == "/")
-            {
-                temp = "";
-                return temp;
-            }
-            else
-            {
-                temp = "NULL";
-                return temp;
-            }
         }
 
 
