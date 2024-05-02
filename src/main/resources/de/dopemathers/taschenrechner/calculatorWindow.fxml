@@ -242,39 +242,6 @@
                   <Font size="16.0" />
                </font>
             </Button>
-            <GridPane GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.0" minWidth="10.0" prefWidth="50.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Button id="styleButton" fx:id="styleButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="65.0" text="%styleButton" textAlignment="CENTER" GridPane.columnIndex="1">
-                     <stylesheets>
-                        <URL value="@styles/taschenrechner-darkmode.css" />
-                        <URL value="@styles/taschenrechner-greenmode.css" />
-                     </stylesheets>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
-                  <Button id="langButton" fx:id="langButton" mnemonicParsing="false" text="%langButton" textAlignment="CENTER">
-                     <stylesheets>
-                        <URL value="@styles/taschenrechner-darkmode.css" />
-                        <URL value="@styles/taschenrechner-greenmode.css" />
-                     </stylesheets>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
-               </children>
-               <stylesheets>
-                  <URL value="@styles/taschenrechner-darkmode.css" />
-                  <URL value="@styles/taschenrechner-greenmode.css" />
-               </stylesheets>
-            </GridPane>
          </children>
          <stylesheets>
             <URL value="@styles/taschenrechner-greenmode.css" />
@@ -292,13 +259,25 @@
           </Menu>
           <Menu id="settings" fx:id="settings" mnemonicParsing="false" text="%settings">
             <items>
-              <MenuItem id="german" fx:id="german" mnemonicParsing="false" onAction="#onGerPressed" text="%german" />
-                  <MenuItem id="english" fx:id="english" mnemonicParsing="false" onAction="#onEngPressed" text="%english" />
+                  <Menu id="langMenu" fx:id="langMenu" mnemonicParsing="false" text="Language">
+                     <items>
+                        <MenuItem id="english" fx:id="english" mnemonicParsing="false" onAction="#onEngPressed" text="%english" />
+                    <MenuItem id="german" fx:id="german" mnemonicParsing="false" onAction="#onGerPressed" text="%german" />
+                     </items>
+                  </Menu>
+                  <Menu id="styleMenu" fx:id="styleMenu" mnemonicParsing="false" text="styleMenu">
+                    <items>
+                      <MenuItem id="whiteMode" fx:id="whiteMode" mnemonicParsing="false" onAction="#onWhiteModePressed" text="whiteMode" />
+                        <MenuItem id="darkMode" fx:id="darkMode" mnemonicParsing="false" onAction="#onDarkModePressed" text="darkMode" />
+                        <MenuItem id="greenMode" fx:id="greenMode" mnemonicParsing="false" onAction="#onGreenModePressed" text="greenMode" />
+                        <MenuItem id="redMode" fx:id="redMode" mnemonicParsing="false" onAction="#onRedModePressed" text="redMode" />
+                    </items>
+                  </Menu>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="%about">
             <items>
-              <MenuItem id="abt" fx:id="abt" mnemonicParsing="false" text="%abt" />
+              <MenuItem id="abt" fx:id="abt" mnemonicParsing="false" onAction="#onAboutPressed" text="%abt" />
             </items>
           </Menu>
         </menus>

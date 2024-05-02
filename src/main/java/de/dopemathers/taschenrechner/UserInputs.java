@@ -70,6 +70,32 @@ public class UserInputs
 
 
         @FXML
+        private void onAboutPressed()
+        {
+            // Muss noch implementiert werden, zweites Fenster welches sich öffnet und Informationen bereit stellt
+        }
+        @FXML
+        private void onWhiteModePressed()
+        {
+            // Muss noch implementiert werden
+        }
+        @FXML
+        private void onDarkModePressed()
+        {
+            // Muss noch implementiert werden
+        }
+        @FXML
+        private void onGreenModePressed()
+        {
+            // Muss noch implementiert werden
+        }
+        @FXML
+        private void onRedModePressed()
+        {
+            // Muss noch implementiert werden
+        }
+
+        @FXML
         private void onEngPressed() throws IOException
         {
             Calculator.setLanguage("en","EN");
