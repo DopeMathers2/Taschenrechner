@@ -286,14 +286,14 @@
           <Menu mnemonicParsing="false" text="%programm">
             <items>
               <MenuItem id="close" fx:id="close" mnemonicParsing="false" onAction="#onClosePressed" text="%close" />
-                  <MenuItem id="maximize" fx:id="maximize" mnemonicParsing="false" text="%maximize" />
-                  <MenuItem id="minimize" fx:id="minimize" mnemonicParsing="false" text="%minimize" />
+                  <MenuItem id="maximize" fx:id="maximize" mnemonicParsing="false" onAction="#onMaxPressed" text="%maximize" />
+                  <MenuItem id="minimize" fx:id="minimize" mnemonicParsing="false" onAction="#onMinPressed" text="%minimize" />
             </items>
           </Menu>
           <Menu id="settings" fx:id="settings" mnemonicParsing="false" text="%settings">
             <items>
-              <MenuItem id="german" fx:id="german" mnemonicParsing="false" text="%german" />
-                  <MenuItem id="english" fx:id="english" mnemonicParsing="false" text="%english" />
+              <MenuItem id="german" fx:id="german" mnemonicParsing="false" onAction="#onGerPressed" text="%german" />
+                  <MenuItem id="english" fx:id="english" mnemonicParsing="false" onAction="#onEngPressed" text="%english" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="%about">

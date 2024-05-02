@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class UserInputs
@@ -67,12 +68,35 @@ public class UserInputs
         @FXML
         MenuItem close;
 
+
+        @FXML
+        private void onEngPressed() throws IOException
+        {
+            Calculator.setLanguage("en","EN");
+        }
+
+        @FXML
+        private void onGerPressed() throws IOException
+        {
+            Calculator.setLanguage("de","DE");
+        }
+
         @FXML
         private void onClosePressed()
         {
+            Calculator.exitApp();
+        }
 
-            tempDisplay.getScene().getWindow().t
+        @FXML
+        private void onMinPressed()
+        {
+           Calculator.minApp();
+        }
 
+        @FXML
+        private void onMaxPressed()
+        {
+            Calculator.maxApp(); // funktioniert, möglichkeit aus Vollbild zu kommen einbauen
         }
 
         @FXML

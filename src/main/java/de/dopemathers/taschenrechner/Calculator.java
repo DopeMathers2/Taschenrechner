@@ -1,6 +1,7 @@
 package de.dopemathers.taschenrechner;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -21,6 +22,7 @@ public class Calculator extends Application
     private final Image img256 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon256.png")));
     private final Image img512 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon512.png")));
     private static ResourceBundle bundle;
+    private static Stage stg;
 
     @Override
     public void start(Stage stage) throws IOException
@@ -46,6 +48,7 @@ public class Calculator extends Application
 
         stage.setScene(scene);
         stage.show();
+        stg = stage;
 
     }
 
@@ -56,5 +59,34 @@ public class Calculator extends Application
 
     public static ResourceBundle getBundle(){
         return bundle;
+    }
+
+    public static void setLanguage(String language, String country) throws IOException
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
+        fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale(language,country)));
+        bundle = fxmlLoader.getResources();
+        stg.setTitle(bundle.getString("window-title")); //geht das onTheFly! JUUUP es geht otf nice !
+        Scene scene = new Scene(fxmlLoader.load(), 400, 430);
+        stg.setScene(scene);
+    }
+
+    public static void setStyle()
+    {
+        //Implement das User zwischen Designes wechseln kann, sprich er kann zwischen den CSS Dateien switchen
+    }
+
+    public static void exitApp(){
+        Platform.exit();
+    }
+
+    public static void maxApp()
+    {
+        stg.setFullScreen(true);
+    }
+
+    public static void minApp()
+    {
+        stg.setIconified(true);
     }
 }
