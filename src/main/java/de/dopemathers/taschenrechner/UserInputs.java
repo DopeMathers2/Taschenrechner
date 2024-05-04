@@ -130,6 +130,8 @@ public class UserInputs
             stg.show();
 
         }
+
+        //wieso können die designs nur einmal geswapt werden?
         @FXML
         private void onWhiteModePressed()
         {
