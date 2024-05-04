@@ -2,9 +2,6 @@ package de.dopemathers.taschenrechner;
 
 public class Calculate
 {
-    private double variableOne;
-    private double variableTwo;
-    private String calcString;
     private double result;
 
     public double addition(double value1,double value2)
