@@ -22,7 +22,7 @@ public class AboutWindow
         textArea.setEditable(false);
         textArea.setMouseTransparent(true);
         textArea.setFocusTraversable(false);
-        String  style= Objects.requireNonNull(Calculator.class.getResource("styles/" + Calculator.actualStyle)).toExternalForm();
+        String  style= Objects.requireNonNull(Calculator.class.getResource("styles/" + Calculator.getStyle())).toExternalForm();
         textArea.getStylesheets().add(style);
 
     }

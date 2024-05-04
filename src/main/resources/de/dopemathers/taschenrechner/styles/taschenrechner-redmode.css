@@ -1,10 +1,10 @@
 .root
 {
-    -fx-background-color: #00de00;
+    -fx-background-color: #db0000;
         -fx-background-color:
-            #00de00,
-            linear-gradient(#00de00 0%, #c9c9c9 20%, #f9f9f9 100%),
-            linear-gradient(#00de00, #333333),
+            #db0000,
+            linear-gradient(#db0000 0%, #c9c9c9 20%, #f9f9f9 100%),
+            linear-gradient(#db0000, #333333),
             radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
         -fx-font-family: "Comic Sans MS";
 }

@@ -117,7 +117,7 @@ public class UserInputs
             stg.setTitle(bundle.getString("abt-window-title"));
             Scene scene = new Scene(fxmlLoader.load(), 400, 430);
 
-            String  style= Calculator.class.getResource("styles/" + Calculator.actualStyle).toExternalForm();
+            String  style= Calculator.class.getResource("styles/" + Calculator.getStyle()).toExternalForm();
             scene.getStylesheets().add(style);
             stg.getIcons().add(Calculator.getImg16());
             stg.getIcons().add(Calculator.getImg32());
@@ -134,21 +134,25 @@ public class UserInputs
         private void onWhiteModePressed()
         {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-whitemode.css");
+            Calculator.setStyle("taschenrechner-whitemode.css");
         }
         @FXML
         private void onDarkModePressed()
         {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-darkmode.css");
+            Calculator.setStyle("taschenrechner-darkmode.css");
         }
         @FXML
         private void onGreenModePressed()
         {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-greenmode.css");
+            Calculator.setStyle("taschenrechner-greenmode.css");
         }
         @FXML
         private void onRedModePressed()
         {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-redmode.css");
+            Calculator.setStyle("taschenrechner-redmode.css");
         }
 
         @FXML

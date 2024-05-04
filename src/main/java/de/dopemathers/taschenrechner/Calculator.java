@@ -50,22 +50,26 @@ public class Calculator extends Application
     private static final Image img128 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon128.png")));
     private static final Image img256 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon256.png")));
     private static final Image img512 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon512.png")));
+
+
+    private static String style = "taschenrechner-darkmode.css";
     private static ResourceBundle bundle;
     private static Stage stg;
 
-    public static String actualStyle;
+    //public static String actualStyle;
     public static Locale actualLocale;
 
     @Override
     public void start(Stage stage) throws IOException {
 
+        actualLocale = new Locale("en","EN");
         FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
 
         //noinspection deprecation
-        fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale("de", "DE")));
+        fxmlLoader.setResources(ResourceBundle.getBundle("lang", actualLocale));
         bundle = fxmlLoader.getResources();
 
-        actualLocale = new Locale("de","DE");
+
 
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
 
@@ -85,7 +89,8 @@ public class Calculator extends Application
 
 
         initTextField(fxmlLoader);
-        setStyle(scene,"taschenrechner-darkmode.css");
+        setStyle(scene,style);
+        //actualStyle = style;
 
         stage.show();
 
@@ -111,7 +116,7 @@ public class Calculator extends Application
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
         UserInputs.initKeyEvents(scene);
         initTextField(fxmlLoader);
-        setStyle(scene,actualStyle);
+        setStyle(scene,style);
         stg.setScene(scene);
 
     }
@@ -127,7 +132,7 @@ public class Calculator extends Application
         String  style= Calculator.class.getResource("styles/" + mode).toExternalForm();
         scene.getStylesheets().add(style);
         stg.setScene(scene);
-        actualStyle = mode;
+        style = mode;
     }
 
     public static void exitApp(){
@@ -142,6 +147,16 @@ public class Calculator extends Application
     public static void minApp()
     {
         stg.setIconified(true);
+    }
+
+    public static String getStyle()
+    {
+        return style;
+    }
+
+    public static void setStyle(String style)
+    {
+        Calculator.style = style;
     }
 
 }
