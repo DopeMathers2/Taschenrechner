@@ -7,47 +7,37 @@
 
 <AnchorPane id="mainPane" fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dopemathers.taschenrechner.AboutWindow">
    <children>
-      <VBox id="vbox" fx:id="vbox" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox id="vbox" fx:id="vbox" alignment="TOP_CENTER" layoutX="250.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <MenuBar id="menuBar" fx:id="menuBar">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="%programm">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem id="close" fx:id="close" mnemonicParsing="false" onAction="#okButtonPressed" text="%close" />
                   </items>
                 </Menu>
               </menus>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
                <padding>
                   <Insets bottom="2.0" top="2.0" />
                </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </MenuBar>
             <TextArea id="textArea" fx:id="textArea" prefHeight="238.0" prefWidth="600.0">
                <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
                   <Insets left="10.0" right="10.0" />
-               </padding>
+               </VBox.margin>
+               <font>
+                  <Font size="23.0" />
+               </font>
             </TextArea>
             <Button id="okButton" fx:id="okButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#okButtonPressed" text="%okButton">
                <font>
                   <Font size="35.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="20.0" left="230.0" right="230.0" top="20.0" />
+                  <Insets bottom="20.0" left="230.0" right="230.0" top="50.0" />
                </VBox.margin>
             </Button>
          </children>

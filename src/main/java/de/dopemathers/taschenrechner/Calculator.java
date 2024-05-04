@@ -20,15 +20,41 @@ import java.util.ResourceBundle;
 public class Calculator extends Application
 {
 
-    private final Image img16 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon16.png")));
-    private final Image img32 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon32.png")));
-    private final Image img64 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon64.png")));
-    private final Image img128 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon128.png")));
-    private final Image img256 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon256.png")));
-    private final Image img512 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon512.png")));
+    public static Image getImg16() {
+        return img16;
+    }
+
+    public static Image getImg32() {
+        return img32;
+    }
+
+    public static Image getImg64() {
+        return img64;
+    }
+
+    public static Image getImg128() {
+        return img128;
+    }
+
+    public static Image getImg256() {
+        return img256;
+    }
+
+    public static Image getImg512() {
+        return img512;
+    }
+
+    private static final Image img16 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon16.png")));
+    private static final Image img32 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon32.png")));
+    private static final Image img64 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon64.png")));
+    private static final Image img128 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon128.png")));
+    private static final Image img256 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon256.png")));
+    private static final Image img512 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon512.png")));
     private static ResourceBundle bundle;
     private static Stage stg;
-    private static String actualStyle;
+
+    public static String actualStyle;
+    public static Locale actualLocale;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -39,12 +65,14 @@ public class Calculator extends Application
         fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale("de", "DE")));
         bundle = fxmlLoader.getResources();
 
+        actualLocale = new Locale("de","DE");
+
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
 
         UserInputs.initKeyEvents(scene);
 
-        stage.setMinHeight(430);
-        stage.setMinWidth(400);
+        stage.setMinHeight(490);
+        stage.setMinWidth(440);
         stage.setTitle(bundle.getString("window-title"));
 
         stage.getIcons().add(img16);
@@ -57,7 +85,7 @@ public class Calculator extends Application
 
 
         initTextField(fxmlLoader);
-        setStyle(scene,"taschenrechner-greenmode.css");
+        setStyle(scene,"taschenrechner-darkmode.css");
 
         stage.show();
 
@@ -77,6 +105,7 @@ public class Calculator extends Application
     {
         FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
         fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale(language,country)));
+        actualLocale = new Locale(language,country);
         bundle = fxmlLoader.getResources();
         stg.setTitle(bundle.getString("window-title")); //geht das onTheFly! JUUUP es geht otf nice !
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);

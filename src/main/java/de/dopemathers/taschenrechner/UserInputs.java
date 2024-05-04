@@ -85,12 +85,14 @@ public class UserInputs
         @FXML
         MenuItem close;
 
-        public static TextField referenceKeyPublic;
+        public static TextField calcDisplayPublic;
+        public static Label tempDisplayPublic;
 
         @FXML
         public void initialize()
         {
-            UserInputs.referenceKeyPublic = calcDisplay;
+            UserInputs.calcDisplayPublic = calcDisplay;
+            UserInputs.tempDisplayPublic = tempDisplay;
         }
 
         public void initTextField()
@@ -104,18 +106,29 @@ public class UserInputs
         private void onAboutPressed() throws IOException {
             Stage stg = new Stage();
             stg.setResizable(false);
-            stg.setHeight(300);
-            stg.setWidth(400);
+            stg.setHeight(600);
+            stg.setWidth(800);
+
             FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("aboutWindow.fxml"));
 
             //noinspection deprecation
-            fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale("de", "DE")));
+            fxmlLoader.setResources(ResourceBundle.getBundle("lang", Calculator.actualLocale));
             bundle = fxmlLoader.getResources();
-
+            stg.setTitle(bundle.getString("abt-window-title"));
             Scene scene = new Scene(fxmlLoader.load(), 400, 430);
 
+            String  style= Calculator.class.getResource("styles/" + Calculator.actualStyle).toExternalForm();
+            scene.getStylesheets().add(style);
+            stg.getIcons().add(Calculator.getImg16());
+            stg.getIcons().add(Calculator.getImg32());
+            stg.getIcons().add(Calculator.getImg64());
+            stg.getIcons().add(Calculator.getImg128());
+            stg.getIcons().add(Calculator.getImg256());
+            stg.getIcons().add(Calculator.getImg512());
             stg.setScene(scene);
+
             stg.show();
+
         }
         @FXML
         private void onWhiteModePressed()
@@ -251,13 +264,15 @@ public class UserInputs
                     firstSignTriggered = true;
                     //varOne muss 1 hinzugefügt werden
                     varOne = varOne + button;
-                    referenceKeyPublic.setText(varOne);
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
                 } else {
                     //Ist es ein anderes Zeichen muss es auf Plus gesetzt werden
                     firstSign = "+";
                     firstSignTriggered = true;
                     varOne = varOne + button;
-                    referenceKeyPublic.setText(varOne);
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
                 }
             }    //Sollte es bereits gesetzt sein muss geprüft werden ob varOne triggerd ist
             else if(varOneTriggered)
@@ -268,13 +283,15 @@ public class UserInputs
                     //wenn pMMDTriggered wurde muss die zahl varTwo angehangen werden
                     varTwo = varTwo + button;
                     varTwoTriggered = true;
-                    referenceKeyPublic.setText(varTwo);
+                    calcDisplayPublic.setText(varTwo);
+                    tempDisplayPublic.setText(varOne+pMMD+varTwo);
                 }
                 else
                 {
                     //ist pMMD nicht getriggered wird es varOne angehänt.
                     varOne = varOne + button;
-                    referenceKeyPublic.setText(varOne);
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
                 }
 
             }
@@ -282,7 +299,8 @@ public class UserInputs
             {
                 //Ist varOne noch nicht getriggered muss die Zahl an varOne angehängt werden
                 varOne = varOne + button;
-                referenceKeyPublic.setText(varOne);
+                calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(varOne);
             }
         }
 
@@ -363,25 +381,29 @@ public class UserInputs
                 {
                     temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
-                    referenceKeyPublic.setText(varOne);
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("-"))
                 {
                     temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
-                    referenceKeyPublic.setText(varOne);
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("*"))
                 {
                     temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
-                    referenceKeyPublic.setText(varOne);
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("/"))
                 {
                     temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
-                    referenceKeyPublic.setText(varOne);
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
                 }
             }
         }
@@ -405,10 +427,12 @@ public class UserInputs
         {
             String temp = calcDisplay.getText();
             varOne = temp;
+
             calcDisplay.setText(bundle.getString("plus-button"));
             pMMD = bundle.getString("plus-button");
 
             tempDisplay.setText(varOne + " " + pMMD + " ");
+            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
 
             //test
             System.out.println("varOne ist: " + varOne);
@@ -423,6 +447,7 @@ public class UserInputs
             varOne = temp;
             calcDisplay.setText(bundle.getString("minus-button"));
             pMMD = bundle.getString("minus-button");
+            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
 
 
             //test
@@ -438,6 +463,7 @@ public class UserInputs
             varOne = temp;
             calcDisplay.setText(bundle.getString("multiply-button"));
             pMMD = bundle.getString("multiply-button");
+            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
 
 
             //test
@@ -453,6 +479,7 @@ public class UserInputs
             varOne = temp;
             calcDisplay.setText(bundle.getString("div-button"));
             pMMD = bundle.getString("div-button");
+            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
 
 
             //test
@@ -469,14 +496,16 @@ public class UserInputs
                     if(!varOne.equalsIgnoreCase("")) {
                         varOne = varOne + ".";
                         pointTriggered = true;
-                        referenceKeyPublic.setText(varOne);
+                        calcDisplayPublic.setText(varOne);
+                        tempDisplayPublic.setText(varOne);
                     }
                     else
                     {
                         varOne = "0";
                         varOne = varOne + ".";
                         pointTriggered = true;
-                        referenceKeyPublic.setText(varOne);
+                        calcDisplayPublic.setText(varOne);
+                        tempDisplayPublic.setText(varOne);
                     }
                 }
                 else
@@ -484,14 +513,16 @@ public class UserInputs
                     if(!varTwo.equalsIgnoreCase("")) {
                         varTwo = varTwo + ".";
                         pointTriggered = true;
-                        referenceKeyPublic.setText(varTwo);
+                        calcDisplayPublic.setText(varTwo);
+                        tempDisplayPublic.setText(varOne+pMMD+varTwo);
                     }
                     else
                     {
                         varTwo = "0";
                         varTwo = varTwo + ".";
                         pointTriggered = true;
-                        referenceKeyPublic.setText(varTwo);
+                        calcDisplayPublic.setText(varTwo);
+                        tempDisplayPublic.setText(varOne+pMMD+varTwo);
                     }
                 }
 
@@ -633,7 +664,8 @@ public class UserInputs
     public static void deleteAll()
     {
 
-        UserInputs.referenceKeyPublic.setText("");
+        calcDisplayPublic.setText("");
+        tempDisplayPublic.setText("");
         System.out.println("deleteAll ausgeführt!");
 
         varOne = "";
