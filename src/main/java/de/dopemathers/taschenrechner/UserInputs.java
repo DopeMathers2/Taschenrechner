@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,23 +22,24 @@ public class UserInputs
         private String sC = "N";
 
         //Mathelogic Variables
-        private String pMMD;
-        private boolean pMMDTriggered = false;
+        private static String pMMD;
+        private static boolean pMMDTriggered = false;
 
-        private String varOne;
-        private boolean varOneTriggered = false;
-        private String firstSign;
-        private boolean firstSignTriggered = false;
+        private static String varOne = "";
+        private static boolean varOneTriggered = false;
+        private static String firstSign = "+";
+        private static boolean firstSignTriggered = false;
 
-        private String varTwo;
-        private boolean varTwoTriggered = false;
-        private String secondSign;
-        private boolean secondSignTriggered = false;
+        private static String varTwo = "";
+        private static boolean varTwoTriggered = false;
+        private static String secondSign;
+        private static boolean secondSignTriggered = false;
 
-        private String result;
-        private boolean enterTriggered = false;
+        private static String result;
+        private static boolean enterTriggered = false;
 
-        private boolean escTriggered = false;
+        private static boolean escTriggered = false;
+        private static boolean pointTriggered = false;
 
         //init all Controls + Language bundle
         @FXML
@@ -82,13 +85,19 @@ public class UserInputs
         @FXML
         MenuItem close;
 
+        public static TextField referenceKeyPublic;
+
+        @FXML
+        public void initialize()
+        {
+            UserInputs.referenceKeyPublic = calcDisplay;
+        }
 
         public void initTextField()
         {
             calcDisplay.setMouseTransparent(true);
             calcDisplay.setFocusTraversable(false);
         }
-
 
         //funktioniert fenster muss nur noch logic bekommen und aufgehübscht werden.
         @FXML
@@ -159,33 +168,6 @@ public class UserInputs
             Calculator.maxApp(); // funktioniert, möglichkeit aus Vollbild zu kommen einbauen
         }
 
-        @FXML
-        public void onPMMDPressed(String mathsign)
-        {
-            sC = mathsign;
-
-            switch (sC)
-        {
-            case "+":
-
-                break;
-
-            case "-":
-
-                break;
-
-            case "*":
-
-                break;
-
-            case "/":
-
-                break;
-
-        }
-
-
-        }
 
         private boolean isDigit(String num)
         {
@@ -258,163 +240,164 @@ public class UserInputs
          Es sollte jederzeit mit ESC möglich sein den kompletten Vorgang abzubrechen. -> ESC löscht alle Variablen und setzt den Display zurück */
 
 
-        @FXML
-        public void b1Pressed()
+        public static void writeDisplay(String button)
         {
-            String temp = calcDisplay.getText();
-
-            if(firstSignTriggered)
+            if (firstSign.equals(null)) firstSign = "+";
+            //Es muss geprüft werden ob das Vorzeichen schon gesetzt wurde
+            if(!firstSignTriggered) {
+                //wurde es noch nicht gesetzt muss geprüft werden ob es ein plus oder ein Minus ist
+                if (firstSign.equalsIgnoreCase("+") || firstSign.equalsIgnoreCase("-")) {
+                    //Es muss dann gespeichert werden indem firstSignTriggered true wird
+                    firstSignTriggered = true;
+                    //varOne muss 1 hinzugefügt werden
+                    varOne = varOne + button;
+                    referenceKeyPublic.setText(varOne);
+                } else {
+                    //Ist es ein anderes Zeichen muss es auf Plus gesetzt werden
+                    firstSign = "+";
+                    firstSignTriggered = true;
+                    varOne = varOne + button;
+                    referenceKeyPublic.setText(varOne);
+                }
+            }    //Sollte es bereits gesetzt sein muss geprüft werden ob varOne triggerd ist
+            else if(varOneTriggered)
             {
-                if (varOneTriggered)
+                //Ist varOne schon getriggerd muss geprüft werden ob mathezeichen auch getriggered wurde
+                if(pMMDTriggered)
                 {
-                    if (pMMDTriggered)
-                    {
-                        if (varTwoTriggered)
-                        {
-                            if (enterTriggered)
-                            {
-
-                            }
-                            else
-                            {
-                                varTwo = varTwo + "1";
-                                calcDisplay.setText(temp+ bundle.getString("one-button"));
-                            }
-                        }
-                        else
-                        {
-                            if(isMathsign(temp))
-                            {
-                                secondSign = temp;
-                                secondSignTriggered = true;
-                                varTwo = bundle.getString("one-button");
-                                varTwoTriggered = true;
-                            } else if (isPoint(temp))
-                            {
-                                varTwo = "0" + temp + bundle.getString("one-button");
-                                varTwoTriggered = true;
-
-                            } else if (isDigit(temp)) {
-                                varTwo = temp + bundle.getString("one-button");
-                            }
-                            else {
-                                calcDisplay.setText(bundle.getString("one-button"));
-                            }
-                        }
-                    }
-                    else
-                    {
-
-                        if (isPoint(temp))
-                        {
-                            varOne = "0" + temp + bundle.getString("one-button");
-                            varOneTriggered = true;
-
-                        } else if (isDigit(temp)) {
-                            varOne = temp + bundle.getString("one-button");
-                        }
-                        else {
-                            varOne = varOne + bundle.getString("one-button");
-                            calcDisplay.setText(bundle.getString("one-button"));
-                        }
-                    }
+                    //wenn pMMDTriggered wurde muss die zahl varTwo angehangen werden
+                    varTwo = varTwo + button;
+                    varTwoTriggered = true;
+                    referenceKeyPublic.setText(varTwo);
                 }
                 else
                 {
-
+                    //ist pMMD nicht getriggered wird es varOne angehänt.
+                    varOne = varOne + button;
+                    referenceKeyPublic.setText(varOne);
                 }
-            }
-            else if(isDigit(temp))
-            {
-
-            }
-            else if (isPoint(temp))
-            {
 
             }
             else
             {
-
+                //Ist varOne noch nicht getriggered muss die Zahl an varOne angehängt werden
+                varOne = varOne + button;
+                referenceKeyPublic.setText(varOne);
             }
+        }
 
+        @FXML
+        public void b1Pressed()
+        {
 
-
+            writeDisplay("1");
 
         }
 
         @FXML
         public void b2Pressed()
         {
-             String temp = calcDisplay.getText();
-             calcDisplay.setText(temp+ bundle.getString("two-button"));
+             writeDisplay("2");
         }
 
         @FXML
         public void b3Pressed()
         {
-           String temp = calcDisplay.getText();
-           calcDisplay.setText(temp+ bundle.getString("three-button"));
+           writeDisplay("3");
         }
 
         @FXML
         public void b4Pressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("four-button"));
+           writeDisplay("4");
         }
 
         @FXML
         public void b5Pressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("five-button"));
+            writeDisplay("5");
         }
 
         @FXML
         public void b6Pressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("six-button"));
+            writeDisplay("6");
         }
 
         @FXML
         public void b7Pressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("seven-button"));
+            writeDisplay("7");
         }
 
         @FXML
         public void b8Pressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("aight-button"));
+            writeDisplay("8");
         }
 
         @FXML
         public void b9Pressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("nine-button"));
+            writeDisplay("9");
         }
 
         @FXML
         public void b0Pressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("zero-button"));
+            writeDisplay("0");
+        }
+
+        private static void doMath()
+        {
+            Calculate clac = new Calculate();
+            Double temp;
+
+            //testcase
+            temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+            System.out.println(temp);
+
+            if (varTwoTriggered)
+            {
+                if (pMMD.equalsIgnoreCase("+"))
+                {
+                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                    varOne = temp.toString();
+                    referenceKeyPublic.setText(varOne);
+                }
+                else if (pMMD.equalsIgnoreCase("-"))
+                {
+                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                    varOne = temp.toString();
+                    referenceKeyPublic.setText(varOne);
+                }
+                else if (pMMD.equalsIgnoreCase("*"))
+                {
+                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                    varOne = temp.toString();
+                    referenceKeyPublic.setText(varOne);
+                }
+                else if (pMMD.equalsIgnoreCase("/"))
+                {
+                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                    varOne = temp.toString();
+                    referenceKeyPublic.setText(varOne);
+                }
+            }
         }
 
         @FXML
         public void bEnterPressed()
         {
 
+            doMath();
+
         }
 
         @FXML
         public void bESCPressed()
         {
-            calcDisplay.setText("");
+            deleteAll();
         }
 
         @FXML
@@ -424,7 +407,6 @@ public class UserInputs
             varOne = temp;
             calcDisplay.setText(bundle.getString("plus-button"));
             pMMD = bundle.getString("plus-button");
-            onPMMDPressed(pMMD);
 
             tempDisplay.setText(varOne + " " + pMMD + " ");
 
@@ -441,7 +423,6 @@ public class UserInputs
             varOne = temp;
             calcDisplay.setText(bundle.getString("minus-button"));
             pMMD = bundle.getString("minus-button");
-            onPMMDPressed(pMMD);
 
 
             //test
@@ -457,7 +438,6 @@ public class UserInputs
             varOne = temp;
             calcDisplay.setText(bundle.getString("multiply-button"));
             pMMD = bundle.getString("multiply-button");
-            onPMMDPressed(pMMD);
 
 
             //test
@@ -473,7 +453,6 @@ public class UserInputs
             varOne = temp;
             calcDisplay.setText(bundle.getString("div-button"));
             pMMD = bundle.getString("div-button");
-            onPMMDPressed(pMMD);
 
 
             //test
@@ -482,13 +461,199 @@ public class UserInputs
             System.out.println("varTwo ist: " + varTwo);
         }
 
+        private static void writePoint()
+        {
+            //Wenn punkt nicht getriggered ist teste ob varOne getriggerd ist wenn nicht und der String ist ungleich "" füge "." hinzu.
+            if (!pointTriggered) {
+                if(!varOneTriggered){
+                    if(!varOne.equalsIgnoreCase("")) {
+                        varOne = varOne + ".";
+                        pointTriggered = true;
+                        referenceKeyPublic.setText(varOne);
+                    }
+                    else
+                    {
+                        varOne = "0";
+                        varOne = varOne + ".";
+                        pointTriggered = true;
+                        referenceKeyPublic.setText(varOne);
+                    }
+                }
+                else
+                {
+                    if(!varTwo.equalsIgnoreCase("")) {
+                        varTwo = varTwo + ".";
+                        pointTriggered = true;
+                        referenceKeyPublic.setText(varTwo);
+                    }
+                    else
+                    {
+                        varTwo = "0";
+                        varTwo = varTwo + ".";
+                        pointTriggered = true;
+                        referenceKeyPublic.setText(varTwo);
+                    }
+                }
+
+
+            }
+        }
+
         @FXML
         public void bPunktPressed()
         {
-            String temp = calcDisplay.getText();
-            calcDisplay.setText(temp+ bundle.getString("point"));
+            writePoint();
         }
 
+
+    public static void initKeyEvents(Scene scene)
+    {
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->
+        {
+            if(key.getCode()== KeyCode.ENTER) {
+                doMath();
+                System.out.println("You pressed enter");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD1 || key.getCode()==KeyCode.DIGIT1) {
+                writeDisplay("1");
+                System.out.println("You pressed 1");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD2 || key.getCode()==KeyCode.DIGIT2) {
+                writeDisplay("2");
+                System.out.println("You pressed 2");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD3 || key.getCode()==KeyCode.DIGIT3) {
+                writeDisplay("3");
+                System.out.println("You pressed 3");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD4 || key.getCode()==KeyCode.DIGIT4) {
+                writeDisplay("4");
+                System.out.println("You pressed 4");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD5 || key.getCode()==KeyCode.DIGIT5) {
+                writeDisplay("5");
+                System.out.println("You pressed 5");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD6 || key.getCode()==KeyCode.DIGIT6) {
+                writeDisplay("6");
+                System.out.println("You pressed 6");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD7 || key.getCode()==KeyCode.DIGIT7) {
+                writeDisplay("7");
+                System.out.println("You pressed 7");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD8 || key.getCode()==KeyCode.DIGIT8) {
+                writeDisplay("8");
+                System.out.println("You pressed 8");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD9 || key.getCode()==KeyCode.DIGIT9) {
+                writeDisplay("9");
+                System.out.println("You pressed 9");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD0 || key.getCode()==KeyCode.DIGIT0) {
+                writeDisplay("0");
+                System.out.println("You pressed 0");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.MINUS) {
+                System.out.println("You pressed -");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.PLUS) {
+                System.out.println("You pressed +");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.MULTIPLY) {
+                System.out.println("You pressed *");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.DIVIDE) {
+                System.out.println("You pressed /");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.BACK_SPACE) {
+                System.out.println("You pressed Löschen");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.ESCAPE) {
+                deleteAll();
+                System.out.println("You pressed Escape");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.DECIMAL || key.getCode()==KeyCode.PERIOD) {
+                writePoint();
+            }
+        });
+    }
+
+    public static void deleteAll()
+    {
+
+        UserInputs.referenceKeyPublic.setText("");
+        System.out.println("deleteAll ausgeführt!");
+
+        varOne = "";
+        varOneTriggered = false;
+
+        varTwo = "";
+        varTwoTriggered = false;
+
+        firstSign = "+";
+        firstSignTriggered = false;
+
+        secondSign = "";
+        secondSignTriggered = false;
+
+        pMMD = "";
+        pMMDTriggered = false;
+
+        enterTriggered = false;
+        pointTriggered = false;
+    }
 
         //Getter and Setter Methods
     public Button getOneButton()
@@ -635,4 +800,5 @@ public class UserInputs
     {
         this.zeroButton = zeroButton;
     }
+
 }

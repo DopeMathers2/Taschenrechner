@@ -2,14 +2,17 @@ package de.dopemathers.taschenrechner;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -28,8 +31,7 @@ public class Calculator extends Application
     private static String actualStyle;
 
     @Override
-    public void start(Stage stage) throws IOException
-    {
+    public void start(Stage stage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
 
@@ -39,7 +41,7 @@ public class Calculator extends Application
 
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
 
-        initKeyEvents(scene);
+        UserInputs.initKeyEvents(scene);
 
         stage.setMinHeight(430);
         stage.setMinWidth(400);
@@ -78,7 +80,7 @@ public class Calculator extends Application
         bundle = fxmlLoader.getResources();
         stg.setTitle(bundle.getString("window-title")); //geht das onTheFly! JUUUP es geht otf nice !
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
-        initKeyEvents(scene);
+        UserInputs.initKeyEvents(scene);
         initTextField(fxmlLoader);
         setStyle(scene,actualStyle);
         stg.setScene(scene);
@@ -112,112 +114,5 @@ public class Calculator extends Application
     {
         stg.setIconified(true);
     }
-
-    private static void initKeyEvents(Scene scene)
-    {
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->
-        {
-            if(key.getCode()== KeyCode.ENTER) {
-                System.out.println("You pressed enter");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD1 || key.getCode()==KeyCode.DIGIT1) {
-                System.out.println("You pressed 1");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD2 || key.getCode()==KeyCode.DIGIT2) {
-                System.out.println("You pressed 2");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD3 || key.getCode()==KeyCode.DIGIT3) {
-                System.out.println("You pressed 3");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD4 || key.getCode()==KeyCode.DIGIT4) {
-                System.out.println("You pressed 4");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD5 || key.getCode()==KeyCode.DIGIT5) {
-                System.out.println("You pressed 5");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD6 || key.getCode()==KeyCode.DIGIT6) {
-                System.out.println("You pressed 6");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD7 || key.getCode()==KeyCode.DIGIT7) {
-                System.out.println("You pressed 7");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD8 || key.getCode()==KeyCode.DIGIT8) {
-                System.out.println("You pressed 8");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD9 || key.getCode()==KeyCode.DIGIT9) {
-                System.out.println("You pressed 9");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD0 || key.getCode()==KeyCode.DIGIT0) {
-                System.out.println("You pressed 0");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.MINUS) {
-                System.out.println("You pressed -");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.PLUS) {
-                System.out.println("You pressed +");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.MULTIPLY) {
-                System.out.println("You pressed *");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.DIVIDE) {
-                System.out.println("You pressed /");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.BACK_SPACE) {
-                System.out.println("You pressed Löschen");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.ESCAPE) {
-                System.out.println("You pressed Escape");
-            }
-        });
-    }
-
 
 }

@@ -164,7 +164,7 @@
                   <Insets left="25.0" right="25.0" />
                </GridPane.margin>
             </Button>
-            <Button id="escButton" fx:id="escButton" mnemonicParsing="false" text="%escButton" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button id="escButton" fx:id="escButton" mnemonicParsing="false" onAction="#bESCPressed" text="%escButton" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
                   <Font size="16.0" />
                </font>
