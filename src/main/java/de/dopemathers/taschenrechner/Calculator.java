@@ -5,6 +5,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,10 +25,12 @@ public class Calculator extends Application
     private final Image img512 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/icon/icon512.png")));
     private static ResourceBundle bundle;
     private static Stage stg;
+    private static String actualStyle;
 
     @Override
     public void start(Stage stage) throws IOException
     {
+
         FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
 
         //noinspection deprecation
@@ -34,6 +38,8 @@ public class Calculator extends Application
         bundle = fxmlLoader.getResources();
 
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
+
+        initKeyEvents(scene);
 
         stage.setMinHeight(430);
         stage.setMinWidth(400);
@@ -45,10 +51,14 @@ public class Calculator extends Application
         stage.getIcons().add(img128);
         stage.getIcons().add(img256);
         stage.getIcons().add(img512);
-
-        stage.setScene(scene);
-        stage.show();
         stg = stage;
+
+
+        initTextField(fxmlLoader);
+        setStyle(scene,"taschenrechner-greenmode.css");
+
+        stage.show();
+
 
     }
 
@@ -68,12 +78,25 @@ public class Calculator extends Application
         bundle = fxmlLoader.getResources();
         stg.setTitle(bundle.getString("window-title")); //geht das onTheFly! JUUUP es geht otf nice !
         Scene scene = new Scene(fxmlLoader.load(), 400, 430);
+        initKeyEvents(scene);
+        initTextField(fxmlLoader);
+        setStyle(scene,actualStyle);
         stg.setScene(scene);
+
     }
 
-    public static void setStyle()
+    public static void initTextField(FXMLLoader fxmlLoader)
     {
-        //Implement das User zwischen Designes wechseln kann, sprich er kann zwischen den CSS Dateien switchen
+        UserInputs u = fxmlLoader.getController();
+        u.initTextField();
+    }
+
+    public static void setStyle(Scene scene, String mode)
+    {
+        String  style= Calculator.class.getResource("styles/" + mode).toExternalForm();
+        scene.getStylesheets().add(style);
+        stg.setScene(scene);
+        actualStyle = mode;
     }
 
     public static void exitApp(){
@@ -89,4 +112,112 @@ public class Calculator extends Application
     {
         stg.setIconified(true);
     }
+
+    private static void initKeyEvents(Scene scene)
+    {
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->
+        {
+            if(key.getCode()== KeyCode.ENTER) {
+                System.out.println("You pressed enter");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD1 || key.getCode()==KeyCode.DIGIT1) {
+                System.out.println("You pressed 1");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD2 || key.getCode()==KeyCode.DIGIT2) {
+                System.out.println("You pressed 2");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD3 || key.getCode()==KeyCode.DIGIT3) {
+                System.out.println("You pressed 3");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD4 || key.getCode()==KeyCode.DIGIT4) {
+                System.out.println("You pressed 4");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD5 || key.getCode()==KeyCode.DIGIT5) {
+                System.out.println("You pressed 5");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD6 || key.getCode()==KeyCode.DIGIT6) {
+                System.out.println("You pressed 6");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD7 || key.getCode()==KeyCode.DIGIT7) {
+                System.out.println("You pressed 7");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD8 || key.getCode()==KeyCode.DIGIT8) {
+                System.out.println("You pressed 8");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD9 || key.getCode()==KeyCode.DIGIT9) {
+                System.out.println("You pressed 9");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD0 || key.getCode()==KeyCode.DIGIT0) {
+                System.out.println("You pressed 0");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.MINUS) {
+                System.out.println("You pressed -");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.PLUS) {
+                System.out.println("You pressed +");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.MULTIPLY) {
+                System.out.println("You pressed *");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.DIVIDE) {
+                System.out.println("You pressed /");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.BACK_SPACE) {
+                System.out.println("You pressed Löschen");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.ESCAPE) {
+                System.out.println("You pressed Escape");
+            }
+        });
+    }
+
+
 }

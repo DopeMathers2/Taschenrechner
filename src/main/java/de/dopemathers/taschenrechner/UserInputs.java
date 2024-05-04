@@ -1,6 +1,7 @@
 package de.dopemathers.taschenrechner;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class UserInputs
@@ -23,12 +25,13 @@ public class UserInputs
 
         private String varOne;
         private boolean varOneTriggered = false;
+        private String firstSign;
+        private boolean firstSignTriggered = false;
 
         private String varTwo;
         private boolean varTwoTriggered = false;
-
-        private String firstSign;
-        private boolean firstSignTriggered = false;
+        private String secondSign;
+        private boolean secondSignTriggered = false;
 
         private String result;
         private boolean enterTriggered = false;
@@ -80,30 +83,50 @@ public class UserInputs
         MenuItem close;
 
 
-        @FXML
-        private void onAboutPressed()
+        public void initTextField()
         {
-            // Muss noch implementiert werden, zweites Fenster welches sich öffnet und Informationen bereit stellt
+            calcDisplay.setMouseTransparent(true);
+            calcDisplay.setFocusTraversable(false);
+        }
+
+
+        //funktioniert fenster muss nur noch logic bekommen und aufgehübscht werden.
+        @FXML
+        private void onAboutPressed() throws IOException {
+            Stage stg = new Stage();
+            stg.setResizable(false);
+            stg.setHeight(300);
+            stg.setWidth(400);
+            FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("aboutWindow.fxml"));
+
+            //noinspection deprecation
+            fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale("de", "DE")));
+            bundle = fxmlLoader.getResources();
+
+            Scene scene = new Scene(fxmlLoader.load(), 400, 430);
+
+            stg.setScene(scene);
+            stg.show();
         }
         @FXML
         private void onWhiteModePressed()
         {
-            // Muss noch implementiert werden
+            Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-whitemode.css");
         }
         @FXML
         private void onDarkModePressed()
         {
-            // Muss noch implementiert werden
+            Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-darkmode.css");
         }
         @FXML
         private void onGreenModePressed()
         {
-            // Muss noch implementiert werden
+            Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-greenmode.css");
         }
         @FXML
         private void onRedModePressed()
         {
-            // Muss noch implementiert werden
+            Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-redmode.css");
         }
 
         @FXML
@@ -255,16 +278,45 @@ public class UserInputs
                             else
                             {
                                 varTwo = varTwo + "1";
+                                calcDisplay.setText(temp+ bundle.getString("one-button"));
                             }
                         }
                         else
                         {
+                            if(isMathsign(temp))
+                            {
+                                secondSign = temp;
+                                secondSignTriggered = true;
+                                varTwo = bundle.getString("one-button");
+                                varTwoTriggered = true;
+                            } else if (isPoint(temp))
+                            {
+                                varTwo = "0" + temp + bundle.getString("one-button");
+                                varTwoTriggered = true;
 
+                            } else if (isDigit(temp)) {
+                                varTwo = temp + bundle.getString("one-button");
+                            }
+                            else {
+                                calcDisplay.setText(bundle.getString("one-button"));
+                            }
                         }
                     }
                     else
                     {
 
+                        if (isPoint(temp))
+                        {
+                            varOne = "0" + temp + bundle.getString("one-button");
+                            varOneTriggered = true;
+
+                        } else if (isDigit(temp)) {
+                            varOne = temp + bundle.getString("one-button");
+                        }
+                        else {
+                            varOne = varOne + bundle.getString("one-button");
+                            calcDisplay.setText(bundle.getString("one-button"));
+                        }
                     }
                 }
                 else
@@ -285,7 +337,7 @@ public class UserInputs
 
             }
 
-            calcDisplay.setText(temp+ bundle.getString("one-button"));
+
 
 
         }
