@@ -1,5 +1,6 @@
 package de.dopemathers.taschenrechner;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -84,13 +85,14 @@ public class UserInputs
 
         public static TextField calcDisplayPublic;
         public static Label tempDisplayPublic;
-        public static ResourceBundle bundlePublic;
+        public static Button enterPublic;
 
         @FXML
         public void initialize()
         {
             UserInputs.calcDisplayPublic = calcDisplay;
             UserInputs.tempDisplayPublic = tempDisplay;
+            UserInputs.enterPublic = enterPublic;
         }
 
         public void initTextField()
@@ -267,14 +269,14 @@ public class UserInputs
                     //varOne muss 1 hinzugefügt werden
                     varOne = varOne + button;
                     calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 } else {
                     //Ist es ein anderes Zeichen muss es auf Plus gesetzt werden
                     firstSign = "+";
                     firstSignTriggered = true;
                     varOne = varOne + button;
                     calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
             }
             else
@@ -283,7 +285,7 @@ public class UserInputs
                 {
                     varOne = varOne + button;
                     calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
                 else
                 {
@@ -291,13 +293,13 @@ public class UserInputs
                     {
                         varOne = varOne + button;
                         calcDisplayPublic.setText(varOne);
-                        tempDisplayPublic.setText(varOne);
+                        tempDisplayPublic.setText(firstSign+varOne);
                     }
                     else
                     {
                         varTwo = varTwo + button;
                         calcDisplayPublic.setText(varTwo);
-                        tempDisplayPublic.setText(varOne+pMMD+varTwo);
+                        tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
                         pMMDTriggered = true;
                         System.out.println("pmmd triggered");
                     }
@@ -414,28 +416,28 @@ public class UserInputs
                     temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
                     calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("-"))
                 {
                     temp = clac.substract(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
                     calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("*"))
                 {
                     temp = clac.multiply(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
                     calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("/"))
                 {
                     temp = clac.division(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
                     calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
 
             }
@@ -462,7 +464,11 @@ public class UserInputs
             {
                 if (!firstSignTriggered)
                 {
-                    firstSign = sign;
+                    if (sign.equalsIgnoreCase("+") || sign.equalsIgnoreCase("-"))
+                    {
+                        firstSign = sign;
+                        tempDisplayPublic.setText(firstSign);
+                    }
                 }
                 else //wenn first sign triggered ist kann ich sicher sein in varOne befindet sich eine Zahl
                 {
@@ -481,6 +487,8 @@ public class UserInputs
 
             mathsignPressed(bundle.getString("plus-button"));
             //test
+            System.out.println("firstsign ist: " + firstSign);
+            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
             System.out.println("varOne ist: " + varOne);
             System.out.println("pMMD ist: " + pMMD);
             System.out.println("varTwo ist: " + varTwo);
@@ -492,6 +500,8 @@ public class UserInputs
             mathsignPressed(bundle.getString("minus-button"));
 
             //test
+            System.out.println("firstsign ist: " + firstSign);
+            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
             System.out.println("varOne ist: " + varOne);
             System.out.println("pMMD ist: " + pMMD);
             System.out.println("varTwo ist: " + varTwo);
@@ -503,6 +513,8 @@ public class UserInputs
             mathsignPressed(bundle.getString("multiply-button"));
 
             //test
+            System.out.println("firstsign ist: " + firstSign);
+            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
             System.out.println("varOne ist: " + varOne);
             System.out.println("pMMD ist: " + pMMD);
             System.out.println("varTwo ist: " + varTwo);
@@ -515,6 +527,8 @@ public class UserInputs
 
 
             //test
+            System.out.println("firstsign ist: " + firstSign);
+            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
             System.out.println("varOne ist: " + varOne);
             System.out.println("pMMD ist: " + pMMD);
             System.out.println("varTwo ist: " + varTwo);
@@ -529,7 +543,7 @@ public class UserInputs
                         varOne = varOne + ".";
                         pointTriggered = true;
                         calcDisplayPublic.setText(varOne);
-                        tempDisplayPublic.setText(varOne);
+                        tempDisplayPublic.setText(firstSign+varOne);
                     }
                     else
                     {
@@ -537,7 +551,7 @@ public class UserInputs
                         varOne = varOne + ".";
                         pointTriggered = true;
                         calcDisplayPublic.setText(varOne);
-                        tempDisplayPublic.setText(varOne);
+                        tempDisplayPublic.setText(firstSign+varOne);
                     }
                 }
                 else
@@ -546,7 +560,7 @@ public class UserInputs
                         varTwo = varTwo + ".";
                         pointTriggered = true;
                         calcDisplayPublic.setText(varTwo);
-                        tempDisplayPublic.setText(varOne+pMMD+varTwo);
+                        tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
                     }
                     else
                     {
@@ -554,7 +568,7 @@ public class UserInputs
                         varTwo = varTwo + ".";
                         pointTriggered = true;
                         calcDisplayPublic.setText(varTwo);
-                        tempDisplayPublic.setText(varOne+pMMD+varTwo);
+                        tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
                     }
                 }
 
@@ -573,9 +587,12 @@ public class UserInputs
     {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->
         {
-            if(key.getCode()== KeyCode.ENTER) {
-                doMath();
-                System.out.println("You pressed enter");
+            if(key.getCode()== KeyCode.ENTER || key.getCharacter().getBytes()[0] == '\n' || key.getCharacter().getBytes()[0] == '\r')
+            {
+                if (pMMDTriggered) {
+                    varTwoTriggered = true;
+                    doMath();
+                }
             }
         });
 
@@ -650,14 +667,14 @@ public class UserInputs
         });
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.MINUS) {
+            if(key.getCode()==KeyCode.MINUS || key.getCode()==KeyCode.SUBTRACT) {
                 mathsignPressed("-");
                 System.out.println("You pressed -");
             }
         });
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.PLUS) {
+            if(key.getCode()==KeyCode.ADD || key.getCode()==KeyCode.PLUS) {
                 mathsignPressed("+");
                 System.out.println("You pressed +");
             }
