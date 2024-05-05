@@ -20,30 +20,6 @@ import java.util.ResourceBundle;
 public class Calculator extends Application
 {
 
-    public static Image getImg16() {
-        return img16;
-    }
-
-    public static Image getImg32() {
-        return img32;
-    }
-
-    public static Image getImg64() {
-        return img64;
-    }
-
-    public static Image getImg128() {
-        return img128;
-    }
-
-    public static Image getImg256() {
-        return img256;
-    }
-
-    public static Image getImg512() {
-        return img512;
-    }
-
     private static final Image img16 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon16.png")));
     private static final Image img32 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon32.png")));
     private static final Image img64 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon64.png")));
@@ -58,67 +34,47 @@ public class Calculator extends Application
 
     //public static String actualStyle;
     public static Locale actualLocale;
-
-    @Override
-    public void start(Stage stage) throws IOException {
-
-        actualLocale = new Locale("en","EN");
-        FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
-
-        //noinspection deprecation
-        fxmlLoader.setResources(ResourceBundle.getBundle("lang", actualLocale));
-        bundle = fxmlLoader.getResources();
-
-
-
-        Scene scene = new Scene(fxmlLoader.load(), 400, 430);
-
-        UserInputs.initKeyEvents(scene);
-
-        stage.setMinHeight(490);
-        stage.setMinWidth(440);
-        stage.setTitle(bundle.getString("window-title"));
-
-        stage.getIcons().add(img16);
-        stage.getIcons().add(img32);
-        stage.getIcons().add(img64);
-        stage.getIcons().add(img128);
-        stage.getIcons().add(img256);
-        stage.getIcons().add(img512);
-        stg = stage;
-
-
-        initTextField(fxmlLoader);
-        setStyle(scene,style);
-        //actualStyle = style;
-
-        stage.show();
-
-
-    }
+    private static FXMLLoader fxmlLoader;
 
     public static void main(String[] args)
     {
         launch();
     }
 
-    public static ResourceBundle getBundle(){
-        return bundle;
+    @Override
+    public void start(Stage stage) throws IOException
+    {
+
+        stg = stage;
+        actualLocale = new Locale("en","EN");
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
+        //noinspection deprecation
+        fxmlLoader.setResources(ResourceBundle.getBundle("lang", actualLocale));
+        this.fxmlLoader = fxmlLoader;
+        bundle = fxmlLoader.getResources();
+
+        Scene scene = new Scene(fxmlLoader.load(), 400, 430);
+
+        setStyle(scene,style);
+        initStage();
     }
 
-    public static void setLanguage(String language, String country) throws IOException
+    private static void initStage()
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
-        fxmlLoader.setResources(ResourceBundle.getBundle("lang", new Locale(language,country)));
-        actualLocale = new Locale(language,country);
-        bundle = fxmlLoader.getResources();
-        stg.setTitle(bundle.getString("window-title")); //geht das onTheFly! JUUUP es geht otf nice !
-        Scene scene = new Scene(fxmlLoader.load(), 400, 430);
-        UserInputs.initKeyEvents(scene);
-        initTextField(fxmlLoader);
-        setStyle(scene,style);
-        stg.setScene(scene);
+        System.out.println("stage initalized...");
+        stg.setMinHeight(490);
+        stg.setMinWidth(440);
+        stg.setTitle(bundle.getString("window-title"));
 
+        stg.getIcons().add(img16);
+        stg.getIcons().add(img32);
+        stg.getIcons().add(img64);
+        stg.getIcons().add(img128);
+        stg.getIcons().add(img256);
+        stg.getIcons().add(img512);
+
+        stg.show();
     }
 
     public static void initTextField(FXMLLoader fxmlLoader)
@@ -127,15 +83,35 @@ public class Calculator extends Application
         u.initTextField();
     }
 
-    public static void setStyle(Scene scene, String mode)
+    public static void setLanguage(String language, String country, Scene scn) throws IOException
     {
-        String  style= Calculator.class.getResource("styles/" + mode).toExternalForm();
-        scene.getStylesheets().add(style);
+        actualLocale = new Locale(language,country);
+        FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
+        fxmlLoader.setResources(ResourceBundle.getBundle("lang", actualLocale));
+        bundle = fxmlLoader.getResources();
+        stg.setTitle(bundle.getString("window-title"));
+        Scene scene = new Scene(fxmlLoader.load(), scn.getWidth(), scn.getHeight());
+        UserInputs.initKeyEvents(scene);
+        initTextField(fxmlLoader);
+        setStyle(scene,style);
         stg.setScene(scene);
+
+    }
+
+    public static void setStyle(Scene scn, String mode) throws IOException
+    {
+        System.out.println("setStyle aufgerufen.");
+        String  style= Calculator.class.getResource("styles/" + mode).toExternalForm();
+        scn.getStylesheets().clear();
+        UserInputs.initKeyEvents(scn);
+        initTextField(fxmlLoader);
+        scn.getStylesheets().add(style);
+        stg.setScene(scn);
         style = mode;
     }
 
-    public static void exitApp(){
+    public static void exitApp()
+    {
         Platform.exit();
     }
 
@@ -149,14 +125,49 @@ public class Calculator extends Application
         stg.setIconified(true);
     }
 
+    public static void saveStyle(String style)
+    {
+        Calculator.style = style;
+    }
+
     public static String getStyle()
     {
         return style;
     }
 
-    public static void setStyle(String style)
+    public static Image getImg16()
     {
-        Calculator.style = style;
+        return img16;
+    }
+
+    public static Image getImg32()
+    {
+        return img32;
+    }
+
+    public static Image getImg64()
+    {
+        return img64;
+    }
+
+    public static Image getImg128()
+    {
+        return img128;
+    }
+
+    public static Image getImg256()
+    {
+        return img256;
+    }
+
+    public static Image getImg512()
+    {
+        return img512;
+    }
+
+    public static ResourceBundle getBundle()
+    {
+        return bundle;
     }
 
 }

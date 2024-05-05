@@ -18,11 +18,8 @@ import java.util.ResourceBundle;
 public class UserInputs
 {
 
-
-        private String sC = "N";
-
         //Mathelogic Variables
-        private static String pMMD;
+        private static String pMMD = "";
         private static boolean pMMDTriggered = false;
 
         private static String varOne = "";
@@ -87,6 +84,7 @@ public class UserInputs
 
         public static TextField calcDisplayPublic;
         public static Label tempDisplayPublic;
+        public static ResourceBundle bundlePublic;
 
         @FXML
         public void initialize()
@@ -131,42 +129,41 @@ public class UserInputs
 
         }
 
-        //wieso können die designs nur einmal geswapt werden?
         @FXML
-        private void onWhiteModePressed()
-        {
+        private void onWhiteModePressed() throws IOException {
+            System.out.println("Whitemode");
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-whitemode.css");
-            Calculator.setStyle("taschenrechner-whitemode.css");
+            Calculator.saveStyle("taschenrechner-whitemode.css");
         }
         @FXML
-        private void onDarkModePressed()
-        {
+        private void onDarkModePressed() throws IOException {
+            System.out.println("Darkmode");
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-darkmode.css");
-            Calculator.setStyle("taschenrechner-darkmode.css");
+            Calculator.saveStyle("taschenrechner-darkmode.css");
         }
         @FXML
-        private void onGreenModePressed()
-        {
+        private void onGreenModePressed() throws IOException {
+            System.out.println("Greenmode");
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-greenmode.css");
-            Calculator.setStyle("taschenrechner-greenmode.css");
+            Calculator.saveStyle("taschenrechner-greenmode.css");
         }
         @FXML
-        private void onRedModePressed()
-        {
+        private void onRedModePressed() throws IOException {
+            System.out.println("Redmode");
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-redmode.css");
-            Calculator.setStyle("taschenrechner-redmode.css");
+            Calculator.saveStyle("taschenrechner-redmode.css");
         }
 
         @FXML
         private void onEngPressed() throws IOException
         {
-            Calculator.setLanguage("en","EN");
+            Calculator.setLanguage("en","EN",calcDisplay.getScene());
         }
 
         @FXML
         private void onGerPressed() throws IOException
         {
-            Calculator.setLanguage("de","DE");
+            Calculator.setLanguage("de","DE",calcDisplay.getScene());
         }
 
         @FXML
@@ -261,10 +258,9 @@ public class UserInputs
 
         public static void writeDisplay(String button)
         {
-            if (firstSign.equals(null)) firstSign = "+";
-            //Es muss geprüft werden ob das Vorzeichen schon gesetzt wurde
-            if(!firstSignTriggered) {
-                //wurde es noch nicht gesetzt muss geprüft werden ob es ein plus oder ein Minus ist
+
+            if (firstSignTriggered == false)
+            {
                 if (firstSign.equalsIgnoreCase("+") || firstSign.equalsIgnoreCase("-")) {
                     //Es muss dann gespeichert werden indem firstSignTriggered true wird
                     firstSignTriggered = true;
@@ -280,8 +276,38 @@ public class UserInputs
                     calcDisplayPublic.setText(varOne);
                     tempDisplayPublic.setText(varOne);
                 }
-            }    //Sollte es bereits gesetzt sein muss geprüft werden ob varOne triggerd ist
-            else if(varOneTriggered)
+            }
+            else
+            {
+                if(varOneTriggered == false)
+                {
+                    varOne = varOne + button;
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(varOne);
+                }
+                else
+                {
+                    if(pMMD.equalsIgnoreCase(""))
+                    {
+                        varOne = varOne + button;
+                        calcDisplayPublic.setText(varOne);
+                        tempDisplayPublic.setText(varOne);
+                    }
+                    else
+                    {
+                        varTwo = varTwo + button;
+                        calcDisplayPublic.setText(varTwo);
+                        tempDisplayPublic.setText(varOne+pMMD+varTwo);
+                        pMMDTriggered = true;
+                        System.out.println("pmmd triggered");
+                    }
+
+                }
+
+
+            }
+
+            /*if(varOneTriggered)
             {
                 //Ist varOne schon getriggerd muss geprüft werden ob mathezeichen auch getriggered wurde
                 if(pMMDTriggered)
@@ -301,13 +327,13 @@ public class UserInputs
                 }
 
             }
-            else
+            else if (!varOneTriggered)
             {
                 //Ist varOne noch nicht getriggered muss die Zahl an varOne angehängt werden
                 varOne = varOne + button;
                 calcDisplayPublic.setText(varOne);
                 tempDisplayPublic.setText(varOne);
-            }
+            }*/
         }
 
         @FXML
@@ -392,34 +418,36 @@ public class UserInputs
                 }
                 else if (pMMD.equalsIgnoreCase("-"))
                 {
-                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                    temp = clac.substract(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
                     calcDisplayPublic.setText(varOne);
                     tempDisplayPublic.setText(varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("*"))
                 {
-                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                    temp = clac.multiply(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
                     calcDisplayPublic.setText(varOne);
                     tempDisplayPublic.setText(varOne);
                 }
                 else if (pMMD.equalsIgnoreCase("/"))
                 {
-                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                    temp = clac.division(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                     varOne = temp.toString();
                     calcDisplayPublic.setText(varOne);
                     tempDisplayPublic.setText(varOne);
                 }
+
             }
         }
 
         @FXML
         public void bEnterPressed()
         {
-
-            doMath();
-
+            if (pMMDTriggered) {
+                varTwoTriggered = true;
+                doMath();
+            }
         }
 
         @FXML
@@ -428,18 +456,30 @@ public class UserInputs
             deleteAll();
         }
 
+        private static void mathsignPressed(String sign)
+        {
+            if (pMMDTriggered == false)
+            {
+                if (!firstSignTriggered)
+                {
+                    firstSign = sign;
+                }
+                else //wenn first sign triggered ist kann ich sicher sein in varOne befindet sich eine Zahl
+                {
+                    varOneTriggered = true;
+                    pMMD = sign;
+                }}
+            else
+            {
+                doMath();
+            }
+        }
+
         @FXML
         public void bPlusPressed()
         {
-            String temp = calcDisplay.getText();
-            varOne = temp;
 
-            calcDisplay.setText(bundle.getString("plus-button"));
-            pMMD = bundle.getString("plus-button");
-
-            tempDisplay.setText(varOne + " " + pMMD + " ");
-            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
-
+            mathsignPressed(bundle.getString("plus-button"));
             //test
             System.out.println("varOne ist: " + varOne);
             System.out.println("pMMD ist: " + pMMD);
@@ -449,12 +489,7 @@ public class UserInputs
         @FXML
         public void bMinusPressed()
         {
-            String temp = calcDisplay.getText();
-            varOne = temp;
-            calcDisplay.setText(bundle.getString("minus-button"));
-            pMMD = bundle.getString("minus-button");
-            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
-
+            mathsignPressed(bundle.getString("minus-button"));
 
             //test
             System.out.println("varOne ist: " + varOne);
@@ -465,12 +500,7 @@ public class UserInputs
         @FXML
         public void bMultiplyPressed()
         {
-            String temp = calcDisplay.getText();
-            varOne = temp;
-            calcDisplay.setText(bundle.getString("multiply-button"));
-            pMMD = bundle.getString("multiply-button");
-            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
-
+            mathsignPressed(bundle.getString("multiply-button"));
 
             //test
             System.out.println("varOne ist: " + varOne);
@@ -481,11 +511,7 @@ public class UserInputs
         @FXML
         public void bDivPressed()
         {
-            String temp = calcDisplay.getText();
-            varOne = temp;
-            calcDisplay.setText(bundle.getString("div-button"));
-            pMMD = bundle.getString("div-button");
-            tempDisplayPublic.setText(varOne + " " + pMMD + " ");//implement
+            mathsignPressed(bundle.getString("div-button"));
 
 
             //test
@@ -625,24 +651,28 @@ public class UserInputs
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()==KeyCode.MINUS) {
+                mathsignPressed("-");
                 System.out.println("You pressed -");
             }
         });
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()==KeyCode.PLUS) {
+                mathsignPressed("+");
                 System.out.println("You pressed +");
             }
         });
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()==KeyCode.MULTIPLY) {
+                mathsignPressed("*");
                 System.out.println("You pressed *");
             }
         });
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()==KeyCode.DIVIDE) {
+                mathsignPressed("/");
                 System.out.println("You pressed /");
             }
         });
