@@ -30,11 +30,10 @@ public class UserInputs
 
         private static String varTwo = "";
         private static boolean varTwoTriggered = false;
-        private static String secondSign;
+        private static String secondSign = "+";
         private static boolean secondSignTriggered = false;
 
         private static String result;
-        private static boolean enterTriggered = false;
 
         private static boolean escTriggered = false;
         private static boolean pointTriggered = false;
@@ -186,6 +185,43 @@ public class UserInputs
             Calculator.maxApp(); // funktioniert, möglichkeit aus Vollbild zu kommen einbauen
         }
 
+        @FXML
+        private void onNegatePressed()
+        {
+
+            if (!firstSignTriggered)
+            {
+               if (firstSign.equalsIgnoreCase( "+"))
+               {
+                   firstSign = "-";
+                   calcDisplay.setText(firstSign);
+                   tempDisplay.setText(firstSign);
+               }
+               else
+               {
+                   firstSign = "+";
+                   calcDisplay.setText(firstSign);
+                   tempDisplay.setText(firstSign);
+               }
+            }
+            else
+            {
+                if (secondSign.equalsIgnoreCase("+"))
+                {
+                    secondSign = "-";
+                    calcDisplay.setText(pMMD+ secondSign);
+                    tempDisplay.setText(firstSign+varOne+pMMD+secondSign);
+                }
+                else
+                {
+                    secondSign = "+";
+                    calcDisplay.setText(pMMD);
+                    tempDisplay.setText(firstSign+varOne+pMMD);
+                }
+            }
+
+        }
+
 
         private boolean isDigit(String num)
         {
@@ -241,23 +277,6 @@ public class UserInputs
             }
         }
 
-        /*Buttons pressed methods
-         Wenn button gedrückt wird muss entschieden werden ob Minus oder Plus als vorzeichen stehen -> Sollte Nutzer hier etwas falsches eingeben sollte von + ausgegangen werden, der Bildschrim gelöscht werden und der Test von Vorne beginnen bis Nutzer eine Zahl eingibt.
-         Sobald ein Vorzeichen eingetragen wurde muss dies festgehalten werden und das vorzeichen muss gespeichert werden -> varFirstSign firstSignTriggered
-         Danach muss gecheckt werden ob bereits ein Vorzeichen gespeichert wurde (firstSignTriggered == true), hiernach muss eine Zahl folgen also muss geprüft werden ob die nächste zahl wirklich eine Zahl ist. -> Sollte es nicht Zahl oder Komma (sofern kommaIsTriggered = false) sein so muss das Zeichen gelöscht werden (außnahme Mathezeichen da dies eine neue Variable einleitet)
-         Ist dies erledigt muss die erste Zahl in der ersten Variablen gespeichert werden -> varOne
-         der Check ob es eine Zahl oder ein komma ist muss bei jedem Tastendruck ausgeführt werden.-> Komma darf nur einmal pro Zahl genutzt werden -> kommaTriggered == true -> muss nach Mathezeichen reseteted werden -> kommaTriggered = false;
-         Vorzeichen müssen gesperrt sein bis eine Zahl eingegeben wurde. -> danach muss firstSignTriggered = false; damit müssen die +-*div buttons wieder freigegeben werden
-         Wird nach einem Vorzeichen ein Komma gesetzt muss die erste Zahl automatisch 0 sein -> dies muss jedes mal gecheckt werden solang kommaIsTriggered = false;
-         wird abschließend ein Mathezeichen eingegeben wird die Zahl in varOne gespeichert.
-         danach muss gecheckt werden ob das nächste Zeichen eine Zahl ist oder ein anderes Mathezeichen, bei anderem Mathezeichen wird das aktuelle überschrieben -> pMMD
-         ist es eine Zahl wird das aktuelle Mathezeichen gespeichert. -> pMMD bleibt unverändert
-         ab hier wird gecheckt ob jedes weitere zeichen eine Zahl ist sollte dies der Fall sein wird die varTwo weitergeschrieben -> varTwo + aktuelles Zeichen -> sollte es sich nicht um eine Zahl oder ein Komma handel (sofern kommaIsTriggered == false) so muss dieses Zeichen gelöscht werden -> dies wird wiederholt bis der user Enter drückt (dann wird das ergebnis der von Mathezeichen bestimmten arethmetik ausgegeben) -> Sollte der User nach der zweiten Variablen ein weiteres Mathezeichen eingeben so muss davon ausgegangen werden der User möchte mit dem ergebnis der ersten beiden Variablen und diesem Mathezeichen weiterrechnen.
-         Ist die eingabe Enter wird varOne und varTwo in form von Mathezeichen ausgerechnet in finalVar sowie varOne gespeichert und ausgegeben.
-         ab hier kann mit varOne von vorne gerechnet werden.
-         Es sollte jederzeit mit ESC möglich sein den kompletten Vorgang abzubrechen. -> ESC löscht alle Variablen und setzt den Display zurück */
-
-
         public static void writeDisplay(String button)
         {
 
@@ -268,7 +287,8 @@ public class UserInputs
                     firstSignTriggered = true;
                     //varOne muss 1 hinzugefügt werden
                     varOne = varOne + button;
-                    calcDisplayPublic.setText(varOne);
+                    if(firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                    else calcDisplayPublic.setText(firstSign+varOne);
                     tempDisplayPublic.setText(firstSign+varOne);
                 } else {
                     //Ist es ein anderes Zeichen muss es auf Plus gesetzt werden
@@ -299,7 +319,8 @@ public class UserInputs
                     {
                         varTwo = varTwo + button;
                         calcDisplayPublic.setText(varTwo);
-                        tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
+                        if (secondSign.equalsIgnoreCase("+"))tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
+                        if (secondSign.equalsIgnoreCase("-"))tempDisplayPublic.setText(firstSign+varOne+pMMD+secondSign+varTwo);
                         pMMDTriggered = true;
                         System.out.println("pmmd triggered");
                     }
@@ -309,33 +330,6 @@ public class UserInputs
 
             }
 
-            /*if(varOneTriggered)
-            {
-                //Ist varOne schon getriggerd muss geprüft werden ob mathezeichen auch getriggered wurde
-                if(pMMDTriggered)
-                {
-                    //wenn pMMDTriggered wurde muss die zahl varTwo angehangen werden
-                    varTwo = varTwo + button;
-                    varTwoTriggered = true;
-                    calcDisplayPublic.setText(varTwo);
-                    tempDisplayPublic.setText(varOne+pMMD+varTwo);
-                }
-                else
-                {
-                    //ist pMMD nicht getriggered wird es varOne angehänt.
-                    varOne = varOne + button;
-                    calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(varOne);
-                }
-
-            }
-            else if (!varOneTriggered)
-            {
-                //Ist varOne noch nicht getriggered muss die Zahl an varOne angehängt werden
-                varOne = varOne + button;
-                calcDisplayPublic.setText(varOne);
-                tempDisplayPublic.setText(varOne);
-            }*/
         }
 
         @FXML
@@ -411,6 +405,8 @@ public class UserInputs
 
             if (varTwoTriggered)
             {
+                if (secondSign.equalsIgnoreCase("-")) varTwo = secondSign + varTwo;
+
                 if (pMMD.equalsIgnoreCase("+"))
                 {
                     temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
@@ -440,6 +436,12 @@ public class UserInputs
                     tempDisplayPublic.setText(firstSign+varOne);
                 }
 
+                pMMDTriggered = false;
+                pMMD = "";
+                varTwoTriggered = false;
+                varTwo = "";
+                pointTriggered = false;
+
             }
         }
 
@@ -468,12 +470,17 @@ public class UserInputs
                     {
                         firstSign = sign;
                         tempDisplayPublic.setText(firstSign);
+                        if (firstSign.equalsIgnoreCase("-")) calcDisplayPublic.setText(firstSign);
+                        else calcDisplayPublic.setText("");
                     }
                 }
                 else //wenn first sign triggered ist kann ich sicher sein in varOne befindet sich eine Zahl
                 {
                     varOneTriggered = true;
                     pMMD = sign;
+                    pointTriggered = false;
+                    tempDisplayPublic.setText(firstSign+varOne+sign);
+                    calcDisplayPublic.setText(sign);
                 }}
             else
             {
@@ -736,7 +743,6 @@ public class UserInputs
         pMMD = "";
         pMMDTriggered = false;
 
-        enterTriggered = false;
         pointTriggered = false;
     }
 
