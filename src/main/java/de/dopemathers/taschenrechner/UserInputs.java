@@ -33,9 +33,6 @@ public class UserInputs
         private static String secondSign = "+";
         private static boolean secondSignTriggered = false;
 
-        private static String result;
-
-        private static boolean escTriggered = false;
         private static boolean pointTriggered = false;
 
         //init all Controls + Language bundle
@@ -74,7 +71,7 @@ public class UserInputs
         @FXML
         Button enterButton;
         @FXML
-        Button escButton; /* to implement */
+        Button escButton;
         @FXML
         TextField calcDisplay;
         @FXML
@@ -100,9 +97,143 @@ public class UserInputs
             calcDisplay.setFocusTraversable(false);
         }
 
-        //funktioniert fenster muss nur noch logic bekommen und aufgehübscht werden.
+    public static void initKeyEvents(Scene scene)
+    {
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->
+        {
+            if(key.getCode()== KeyCode.ENTER || key.getCharacter().getBytes()[0] == '\n' || key.getCharacter().getBytes()[0] == '\r')
+            {
+                if (pMMDTriggered)
+                {
+                    varTwoTriggered = true;
+                    doMath();
+                }
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD1 || key.getCode()==KeyCode.DIGIT1)
+            {
+                writeDisplay("1");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD2 || key.getCode()==KeyCode.DIGIT2)
+            {
+                writeDisplay("2");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD3 || key.getCode()==KeyCode.DIGIT3)
+            {
+                writeDisplay("3");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD4 || key.getCode()==KeyCode.DIGIT4)
+            {
+                writeDisplay("4");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD5 || key.getCode()==KeyCode.DIGIT5)
+            {
+                writeDisplay("5");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD6 || key.getCode()==KeyCode.DIGIT6)
+            {
+                writeDisplay("6");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD7 || key.getCode()==KeyCode.DIGIT7)
+            {
+                writeDisplay("7");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD8 || key.getCode()==KeyCode.DIGIT8)
+            {
+                writeDisplay("8");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD9 || key.getCode()==KeyCode.DIGIT9)
+            {
+                writeDisplay("9");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.NUMPAD0 || key.getCode()==KeyCode.DIGIT0)
+            {
+                writeDisplay("0");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.MINUS || key.getCode()==KeyCode.SUBTRACT)
+            {
+                mathsignPressed("-");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.ADD || key.getCode()==KeyCode.PLUS)
+            {
+                mathsignPressed("+");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.MULTIPLY)
+            {
+                mathsignPressed("*");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.DIVIDE)
+            {
+                mathsignPressed("/");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.BACK_SPACE)
+            {
+                System.out.println("You pressed Löschen");
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.ESCAPE)
+            {
+                deleteAll();
+            }
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+            if(key.getCode()==KeyCode.DECIMAL || key.getCode()==KeyCode.PERIOD)
+            {
+                writePoint();
+            }
+        });
+    }
+
         @FXML
-        private void onAboutPressed() throws IOException {
+        private void onAboutPressed() throws IOException
+        {
             Stage stg = new Stage();
             stg.setResizable(false);
             stg.setHeight(600);
@@ -127,30 +258,29 @@ public class UserInputs
             stg.setScene(scene);
 
             stg.show();
-
         }
 
         @FXML
-        private void onWhiteModePressed() throws IOException {
-            System.out.println("Whitemode");
+        private void onWhiteModePressed() throws IOException
+        {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-whitemode.css");
             Calculator.saveStyle("taschenrechner-whitemode.css");
         }
         @FXML
-        private void onDarkModePressed() throws IOException {
-            System.out.println("Darkmode");
+        private void onDarkModePressed() throws IOException
+        {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-darkmode.css");
             Calculator.saveStyle("taschenrechner-darkmode.css");
         }
         @FXML
-        private void onGreenModePressed() throws IOException {
-            System.out.println("Greenmode");
+        private void onGreenModePressed() throws IOException
+        {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-greenmode.css");
             Calculator.saveStyle("taschenrechner-greenmode.css");
         }
         @FXML
-        private void onRedModePressed() throws IOException {
-            System.out.println("Redmode");
+        private void onRedModePressed() throws IOException
+        {
             Calculator.setStyle(calcDisplay.getScene(),"taschenrechner-redmode.css");
             Calculator.saveStyle("taschenrechner-redmode.css");
         }
@@ -222,116 +352,6 @@ public class UserInputs
 
         }
 
-
-        private boolean isDigit(String num)
-        {
-            if(num.equalsIgnoreCase("1") || num.equalsIgnoreCase("2")
-                    || num.equalsIgnoreCase("3") || num.equalsIgnoreCase("4")
-                    || num.equalsIgnoreCase("5") || num.equalsIgnoreCase("6")
-                    || num.equalsIgnoreCase("7") || num.equalsIgnoreCase("8")
-                    || num.equalsIgnoreCase("9") || num.equalsIgnoreCase("0"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-
-        private boolean isPoint(String num)
-        {
-            if (num.equalsIgnoreCase(".") || num.equalsIgnoreCase(","))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private boolean isMathsign(String num)
-        {
-            if(num.equalsIgnoreCase("+") || num.equalsIgnoreCase("-")
-                    || num.equalsIgnoreCase("*") || num.equalsIgnoreCase("/"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private boolean isEnter(String num)
-        {
-            if (num.equalsIgnoreCase("="))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static void writeDisplay(String button)
-        {
-
-            if (firstSignTriggered == false)
-            {
-                if (firstSign.equalsIgnoreCase("+") || firstSign.equalsIgnoreCase("-")) {
-                    //Es muss dann gespeichert werden indem firstSignTriggered true wird
-                    firstSignTriggered = true;
-                    //varOne muss 1 hinzugefügt werden
-                    varOne = varOne + button;
-                    if(firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
-                    else calcDisplayPublic.setText(firstSign+varOne);
-                    tempDisplayPublic.setText(firstSign+varOne);
-                } else {
-                    //Ist es ein anderes Zeichen muss es auf Plus gesetzt werden
-                    firstSign = "+";
-                    firstSignTriggered = true;
-                    varOne = varOne + button;
-                    calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(firstSign+varOne);
-                }
-            }
-            else
-            {
-                if(varOneTriggered == false)
-                {
-                    varOne = varOne + button;
-                    calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(firstSign+varOne);
-                }
-                else
-                {
-                    if(pMMD.equalsIgnoreCase(""))
-                    {
-                        varOne = varOne + button;
-                        calcDisplayPublic.setText(varOne);
-                        tempDisplayPublic.setText(firstSign+varOne);
-                    }
-                    else
-                    {
-                        varTwo = varTwo + button;
-                        calcDisplayPublic.setText(varTwo);
-                        if (secondSign.equalsIgnoreCase("+"))tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
-                        if (secondSign.equalsIgnoreCase("-"))tempDisplayPublic.setText(firstSign+varOne+pMMD+secondSign+varTwo);
-                        pMMDTriggered = true;
-                        System.out.println("pmmd triggered");
-                    }
-
-                }
-
-
-            }
-
-        }
-
         @FXML
         public void b1Pressed()
         {
@@ -394,61 +414,11 @@ public class UserInputs
             writeDisplay("0");
         }
 
-        private static void doMath()
-        {
-            Calculate clac = new Calculate();
-            Double temp;
-
-            //testcase
-            temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
-            System.out.println(temp);
-
-            if (varTwoTriggered)
-            {
-                if (secondSign.equalsIgnoreCase("-")) varTwo = secondSign + varTwo;
-
-                if (pMMD.equalsIgnoreCase("+"))
-                {
-                    temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
-                    varOne = temp.toString();
-                    calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(firstSign+varOne);
-                }
-                else if (pMMD.equalsIgnoreCase("-"))
-                {
-                    temp = clac.substract(Double.parseDouble(varOne),Double.parseDouble(varTwo));
-                    varOne = temp.toString();
-                    calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(firstSign+varOne);
-                }
-                else if (pMMD.equalsIgnoreCase("*"))
-                {
-                    temp = clac.multiply(Double.parseDouble(varOne),Double.parseDouble(varTwo));
-                    varOne = temp.toString();
-                    calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(firstSign+varOne);
-                }
-                else if (pMMD.equalsIgnoreCase("/"))
-                {
-                    temp = clac.division(Double.parseDouble(varOne),Double.parseDouble(varTwo));
-                    varOne = temp.toString();
-                    calcDisplayPublic.setText(varOne);
-                    tempDisplayPublic.setText(firstSign+varOne);
-                }
-
-                pMMDTriggered = false;
-                pMMD = "";
-                varTwoTriggered = false;
-                varTwo = "";
-                pointTriggered = false;
-
-            }
-        }
-
         @FXML
         public void bEnterPressed()
         {
-            if (pMMDTriggered) {
+            if (pMMDTriggered)
+            {
                 varTwoTriggered = true;
                 doMath();
             }
@@ -460,273 +430,272 @@ public class UserInputs
             deleteAll();
         }
 
-        private static void mathsignPressed(String sign)
-        {
-            if (pMMDTriggered == false)
-            {
-                if (!firstSignTriggered)
-                {
-                    if (sign.equalsIgnoreCase("+") || sign.equalsIgnoreCase("-"))
-                    {
-                        firstSign = sign;
-                        tempDisplayPublic.setText(firstSign);
-                        if (firstSign.equalsIgnoreCase("-")) calcDisplayPublic.setText(firstSign);
-                        else calcDisplayPublic.setText("");
-                    }
-                }
-                else //wenn first sign triggered ist kann ich sicher sein in varOne befindet sich eine Zahl
-                {
-                    varOneTriggered = true;
-                    pMMD = sign;
-                    pointTriggered = false;
-                    tempDisplayPublic.setText(firstSign+varOne+sign);
-                    calcDisplayPublic.setText(sign);
-                }}
-            else
-            {
-                doMath();
-            }
-        }
-
         @FXML
         public void bPlusPressed()
         {
-
             mathsignPressed(bundle.getString("plus-button"));
-            //test
-            System.out.println("firstsign ist: " + firstSign);
-            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
-            System.out.println("varOne ist: " + varOne);
-            System.out.println("pMMD ist: " + pMMD);
-            System.out.println("varTwo ist: " + varTwo);
         }
 
         @FXML
         public void bMinusPressed()
         {
             mathsignPressed(bundle.getString("minus-button"));
-
-            //test
-            System.out.println("firstsign ist: " + firstSign);
-            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
-            System.out.println("varOne ist: " + varOne);
-            System.out.println("pMMD ist: " + pMMD);
-            System.out.println("varTwo ist: " + varTwo);
         }
 
         @FXML
         public void bMultiplyPressed()
         {
             mathsignPressed(bundle.getString("multiply-button"));
-
-            //test
-            System.out.println("firstsign ist: " + firstSign);
-            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
-            System.out.println("varOne ist: " + varOne);
-            System.out.println("pMMD ist: " + pMMD);
-            System.out.println("varTwo ist: " + varTwo);
         }
 
         @FXML
         public void bDivPressed()
         {
             mathsignPressed(bundle.getString("div-button"));
-
-
-            //test
-            System.out.println("firstsign ist: " + firstSign);
-            System.out.println("firstsignTriggered ist: " + firstSignTriggered);
-            System.out.println("varOne ist: " + varOne);
-            System.out.println("pMMD ist: " + pMMD);
-            System.out.println("varTwo ist: " + varTwo);
         }
 
-        private static void writePoint()
+    @FXML
+    public void bPunktPressed()
+    {
+        writePoint();
+    }
+
+    private boolean isDigit(String num)
+    {
+        if(num.equalsIgnoreCase("1") || num.equalsIgnoreCase("2")
+                || num.equalsIgnoreCase("3") || num.equalsIgnoreCase("4")
+                || num.equalsIgnoreCase("5") || num.equalsIgnoreCase("6")
+                || num.equalsIgnoreCase("7") || num.equalsIgnoreCase("8")
+                || num.equalsIgnoreCase("9") || num.equalsIgnoreCase("0"))
         {
-            //Wenn punkt nicht getriggered ist teste ob varOne getriggerd ist wenn nicht und der String ist ungleich "" füge "." hinzu.
-            if (!pointTriggered) {
-                if(!varOneTriggered){
-                    if(!varOne.equalsIgnoreCase("")) {
-                        varOne = varOne + ".";
-                        pointTriggered = true;
-                        calcDisplayPublic.setText(varOne);
-                        tempDisplayPublic.setText(firstSign+varOne);
-                    }
-                    else
-                    {
-                        varOne = "0";
-                        varOne = varOne + ".";
-                        pointTriggered = true;
-                        calcDisplayPublic.setText(varOne);
-                        tempDisplayPublic.setText(firstSign+varOne);
-                    }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    private boolean isPoint(String num)
+    {
+        if (num.equalsIgnoreCase(".") || num.equalsIgnoreCase(","))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private boolean isMathsign(String num)
+    {
+        if(num.equalsIgnoreCase("+") || num.equalsIgnoreCase("-")
+                || num.equalsIgnoreCase("*") || num.equalsIgnoreCase("/"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private boolean isEnter(String num)
+    {
+        if (num.equalsIgnoreCase("="))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private static void mathsignPressed(String sign)
+    {
+        if (pMMDTriggered == false)
+        {
+            if (!firstSignTriggered)
+            {
+                if (sign.equalsIgnoreCase("+") || sign.equalsIgnoreCase("-"))
+                {
+                    firstSign = sign;
+                    tempDisplayPublic.setText(firstSign);
+                    if (firstSign.equalsIgnoreCase("-")) calcDisplayPublic.setText(firstSign);
+                    else calcDisplayPublic.setText("");
+                }
+            }
+            else //wenn first sign triggered ist kann ich sicher sein in varOne befindet sich eine Zahl
+            {
+                varOneTriggered = true;
+                pMMD = sign;
+                pointTriggered = false;
+                tempDisplayPublic.setText(firstSign+varOne+sign);
+                calcDisplayPublic.setText(sign);
+            }
+        }
+        else
+        {
+            doMath();
+        }
+    }
+
+    private static void writePoint()
+    {
+        //Wenn punkt nicht getriggered ist teste ob varOne getriggerd ist wenn nicht und der String ist ungleich "" füge "." hinzu.
+        if (!pointTriggered)
+        {
+            if(!varOneTriggered)
+            {
+                if(!varOne.equalsIgnoreCase(""))
+                {
+                    varOne = varOne + ".";
+                    pointTriggered = true;
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
                 else
                 {
-                    if(!varTwo.equalsIgnoreCase("")) {
-                        varTwo = varTwo + ".";
-                        pointTriggered = true;
-                        calcDisplayPublic.setText(varTwo);
-                        tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
-                    }
-                    else
-                    {
-                        varTwo = "0";
-                        varTwo = varTwo + ".";
-                        pointTriggered = true;
-                        calcDisplayPublic.setText(varTwo);
-                        tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
-                    }
+                    varOne = "0";
+                    varOne = varOne + ".";
+                    pointTriggered = true;
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
                 }
-
-
             }
-        }
-
-        @FXML
-        public void bPunktPressed()
-        {
-            writePoint();
-        }
-
-
-    public static void initKeyEvents(Scene scene)
-    {
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) ->
-        {
-            if(key.getCode()== KeyCode.ENTER || key.getCharacter().getBytes()[0] == '\n' || key.getCharacter().getBytes()[0] == '\r')
+            else
             {
-                if (pMMDTriggered) {
-                    varTwoTriggered = true;
-                    doMath();
+                if(!varTwo.equalsIgnoreCase(""))
+                {
+                    varTwo = varTwo + ".";
+                    pointTriggered = true;
+                    calcDisplayPublic.setText(varTwo);
+                    tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
+                }
+                else
+                {
+                    varTwo = "0";
+                    varTwo = varTwo + ".";
+                    pointTriggered = true;
+                    calcDisplayPublic.setText(varTwo);
+                    tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
                 }
             }
-        });
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD1 || key.getCode()==KeyCode.DIGIT1) {
-                writeDisplay("1");
-                System.out.println("You pressed 1");
-            }
-        });
+        }
+    }
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD2 || key.getCode()==KeyCode.DIGIT2) {
-                writeDisplay("2");
-                System.out.println("You pressed 2");
-            }
-        });
+    public static void writeDisplay(String button)
+    {
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD3 || key.getCode()==KeyCode.DIGIT3) {
-                writeDisplay("3");
-                System.out.println("You pressed 3");
+        if (firstSignTriggered == false)
+        {
+            if (firstSign.equalsIgnoreCase("+") || firstSign.equalsIgnoreCase("-"))
+            {
+                //Es muss dann gespeichert werden indem firstSignTriggered true wird
+                firstSignTriggered = true;
+                //varOne muss 1 hinzugefügt werden
+                varOne = varOne + button;
+                if(firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                else calcDisplayPublic.setText(firstSign+varOne);
+                tempDisplayPublic.setText(firstSign+varOne);
             }
-        });
+            else
+            {
+                //Ist es ein anderes Zeichen muss es auf Plus gesetzt werden
+                firstSign = "+";
+                firstSignTriggered = true;
+                varOne = varOne + button;
+                calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(firstSign+varOne);
+            }
+        }
+        else
+        {
+            if(varOneTriggered == false)
+            {
+                varOne = varOne + button;
+                calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(firstSign+varOne);
+            }
+            else
+            {
+                if(pMMD.equalsIgnoreCase(""))
+                {
+                    varOne = varOne + button;
+                    calcDisplayPublic.setText(varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
+                }
+                else
+                {
+                    varTwo = varTwo + button;
+                    calcDisplayPublic.setText(varTwo);
+                    if (secondSign.equalsIgnoreCase("+"))tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
+                    if (secondSign.equalsIgnoreCase("-"))tempDisplayPublic.setText(firstSign+varOne+pMMD+secondSign+varTwo);
+                    pMMDTriggered = true;
+                }
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD4 || key.getCode()==KeyCode.DIGIT4) {
-                writeDisplay("4");
-                System.out.println("You pressed 4");
             }
-        });
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD5 || key.getCode()==KeyCode.DIGIT5) {
-                writeDisplay("5");
-                System.out.println("You pressed 5");
-            }
-        });
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD6 || key.getCode()==KeyCode.DIGIT6) {
-                writeDisplay("6");
-                System.out.println("You pressed 6");
-            }
-        });
+        }
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD7 || key.getCode()==KeyCode.DIGIT7) {
-                writeDisplay("7");
-                System.out.println("You pressed 7");
-            }
-        });
+    }
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD8 || key.getCode()==KeyCode.DIGIT8) {
-                writeDisplay("8");
-                System.out.println("You pressed 8");
-            }
-        });
+    private static void doMath()
+    {
+        Calculate clac = new Calculate();
+        Double temp;
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD9 || key.getCode()==KeyCode.DIGIT9) {
-                writeDisplay("9");
-                System.out.println("You pressed 9");
-            }
-        });
+        if (varTwoTriggered)
+        {
+            if (secondSign.equalsIgnoreCase("-")) varTwo = secondSign + varTwo;
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.NUMPAD0 || key.getCode()==KeyCode.DIGIT0) {
-                writeDisplay("0");
-                System.out.println("You pressed 0");
+            if (pMMD.equalsIgnoreCase("+"))
+            {
+                temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                varOne = temp.toString();
+                calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(firstSign+varOne);
             }
-        });
+            else if (pMMD.equalsIgnoreCase("-"))
+            {
+                temp = clac.substract(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                varOne = temp.toString();
+                calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(firstSign+varOne);
+            }
+            else if (pMMD.equalsIgnoreCase("*"))
+            {
+                temp = clac.multiply(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                varOne = temp.toString();
+                calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(firstSign+varOne);
+            }
+            else if (pMMD.equalsIgnoreCase("/"))
+            {
+                temp = clac.division(Double.parseDouble(varOne),Double.parseDouble(varTwo));
+                varOne = temp.toString();
+                calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(firstSign+varOne);
+            }
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.MINUS || key.getCode()==KeyCode.SUBTRACT) {
-                mathsignPressed("-");
-                System.out.println("You pressed -");
-            }
-        });
+            pMMDTriggered = false;
+            pMMD = "";
+            varTwoTriggered = false;
+            varTwo = "";
+            pointTriggered = false;
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.ADD || key.getCode()==KeyCode.PLUS) {
-                mathsignPressed("+");
-                System.out.println("You pressed +");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.MULTIPLY) {
-                mathsignPressed("*");
-                System.out.println("You pressed *");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.DIVIDE) {
-                mathsignPressed("/");
-                System.out.println("You pressed /");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.BACK_SPACE) {
-                System.out.println("You pressed Löschen");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.ESCAPE) {
-                deleteAll();
-                System.out.println("You pressed Escape");
-            }
-        });
-
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-            if(key.getCode()==KeyCode.DECIMAL || key.getCode()==KeyCode.PERIOD) {
-                writePoint();
-            }
-        });
+        }
     }
 
     public static void deleteAll()
     {
-
         calcDisplayPublic.setText("");
         tempDisplayPublic.setText("");
-        System.out.println("deleteAll ausgeführt!");
 
         varOne = "";
         varOneTriggered = false;
