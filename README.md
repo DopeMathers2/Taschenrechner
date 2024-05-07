@@ -1,4 +1,10 @@
 A little Calculator
 
-Only a first Design, no functions at the moment. 
-It can take the input if a Button is pressed and display it but its dosent store the variables yet and it dosent do any kind of arthmetic operations now.
+It can make very basic calculations. Backspace isen't implemented yet.
+Designs can be switched but aren't designed yet. 
+Language can be swaped between german and english.
+A About window can be opend and closed, you can maximize (only close with alt+f4 then),
+minimize or close the window with the menu bar. 
+Delete and esc do what they should and seperator too. 
+
+But only simple * / - + arethmetics, no () implemented. 

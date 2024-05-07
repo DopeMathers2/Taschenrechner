@@ -1,5 +1,6 @@
 package de.dopemathers.taschenrechner;
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,11 +12,16 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static java.lang.Thread.sleep;
 
 public class Calculator extends Application
 {
@@ -27,6 +33,10 @@ public class Calculator extends Application
     private static final Image img256 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon256.png")));
     private static final Image img512 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon512.png")));
 
+    private static Gson gson;
+    private static boolean fileExists = true;
+    private static FileReader reader = null;
+    private static Config config = null;
 
     private static String style = "taschenrechner-darkmode.css";
     private static ResourceBundle bundle;
@@ -38,15 +48,46 @@ public class Calculator extends Application
 
     public static void main(String[] args)
     {
+        gson = new Gson();
+        actualLocale = new Locale("en","EN");
+
+        try
+        {
+           reader = new FileReader("config.json");
+           config = gson.fromJson(reader,Config.class);
+        }
+        catch (FileNotFoundException e)
+        {
+            config = new Config(new Locale("en","EN"),"taschenrechner-darkmode.css");
+            changeConfig();
+        }
+
         launch();
     }
+
+    public static void changeConfig()
+    {
+        try
+        {
+            FileWriter writer = new FileWriter("config.json");
+            gson.toJson(config, writer);
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
     @Override
     public void start(Stage stage) throws IOException
     {
 
         stg = stage;
-        actualLocale = new Locale("en","EN");
+        style = config.getDesign();
+        actualLocale = config.getLanguage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Calculator.class.getResource("calculatorWindow.fxml"));
         //noinspection deprecation
@@ -62,7 +103,6 @@ public class Calculator extends Application
 
     private static void initStage()
     {
-        System.out.println("stage initalized...");
         stg.setMinHeight(490);
         stg.setMinWidth(440);
         stg.setTitle(bundle.getString("window-title"));
@@ -95,12 +135,12 @@ public class Calculator extends Application
         initTextField(fxmlLoader);
         setStyle(scene,style);
         stg.setScene(scene);
-
+        config.setLanguage(actualLocale);
+        changeConfig();
     }
 
     public static void setStyle(Scene scn, String mode) throws IOException
     {
-        System.out.println("setStyle aufgerufen.");
         String  style= Calculator.class.getResource("styles/" + mode).toExternalForm();
         scn.getStylesheets().clear();
         UserInputs.initKeyEvents(scn);
@@ -108,6 +148,8 @@ public class Calculator extends Application
         scn.getStylesheets().add(style);
         stg.setScene(scn);
         style = mode;
+        config.setDesign(style);
+        changeConfig();
     }
 
     public static void exitApp()
