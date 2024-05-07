@@ -34,7 +34,6 @@ public class Calculator extends Application
     private static final Image img512 = new Image(Objects.requireNonNull(Calculator.class.getResourceAsStream("images/icon/icon512.png")));
 
     private static Gson gson;
-    private static boolean fileExists = true;
     private static FileReader reader = null;
     private static Config config = null;
 
@@ -42,7 +41,6 @@ public class Calculator extends Application
     private static ResourceBundle bundle;
     private static Stage stg;
 
-    //public static String actualStyle;
     public static Locale actualLocale;
     private static FXMLLoader fxmlLoader;
 
@@ -65,22 +63,6 @@ public class Calculator extends Application
         launch();
     }
 
-    public static void changeConfig()
-    {
-        try
-        {
-            FileWriter writer = new FileWriter("config.json");
-            gson.toJson(config, writer);
-            writer.close();
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-
     @Override
     public void start(Stage stage) throws IOException
     {
@@ -95,7 +77,7 @@ public class Calculator extends Application
         this.fxmlLoader = fxmlLoader;
         bundle = fxmlLoader.getResources();
 
-        Scene scene = new Scene(fxmlLoader.load(), 400, 430);
+        Scene scene = new Scene(fxmlLoader.load(), 550, 620);
 
         setStyle(scene,style);
         initStage();
@@ -103,8 +85,8 @@ public class Calculator extends Application
 
     private static void initStage()
     {
-        stg.setMinHeight(490);
-        stg.setMinWidth(440);
+        stg.setMinHeight(660);
+        stg.setMinWidth(580);
         stg.setTitle(bundle.getString("window-title"));
 
         stg.getIcons().add(img16);
@@ -152,6 +134,31 @@ public class Calculator extends Application
         changeConfig();
     }
 
+    public static void saveStyle(String style)
+    {
+        Calculator.style = style;
+    }
+
+    public static String getStyle()
+    {
+        return style;
+    }
+
+    public static void changeConfig()
+    {
+        try
+        {
+            FileWriter writer = new FileWriter("config.json");
+            gson.toJson(config, writer);
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     public static void exitApp()
     {
         Platform.exit();
@@ -165,16 +172,6 @@ public class Calculator extends Application
     public static void minApp()
     {
         stg.setIconified(true);
-    }
-
-    public static void saveStyle(String style)
-    {
-        Calculator.style = style;
-    }
-
-    public static String getStyle()
-    {
-        return style;
     }
 
     public static Image getImg16()
@@ -211,5 +208,6 @@ public class Calculator extends Application
     {
         return bundle;
     }
+
 
 }

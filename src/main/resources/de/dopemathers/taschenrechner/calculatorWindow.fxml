@@ -5,26 +5,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane id="display-grid" fx:id="displayGrid" gridLinesVisible="true" minHeight="430.0" minWidth="400.0" prefHeight="430.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dopemathers.taschenrechner.UserInputs">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-      <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="341.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="341.0" minHeight="10.0" prefHeight="321.0" vgrow="SOMETIMES" />
-  </rowConstraints>
+<GridPane gridLinesVisible="true" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dopemathers.taschenrechner.UserInputs">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints fillHeight="false" maxHeight="-Infinity" prefHeight="50.0" valignment="TOP" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
    <children>
-      <TextField id="calcDisplay" fx:id="calcDisplay" editable="false" focusTraversable="false" prefHeight="52.0" prefWidth="314.0" GridPane.rowIndex="1">
+      <TextField id="calcDisplay" fx:id="calcDisplay" alignment="CENTER" editable="false" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
-         <padding>
-            <Insets left="10.0" top="10.0" />
-         </padding>
       </TextField>
-      <GridPane id="buttonGrid" fx:id="buttonGrid" GridPane.rowIndex="3">
+      <GridPane id="buttonGrid" fx:id="buttonGrid" alignment="CENTER" hgap="30.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="30.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,169 +36,186 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button id="plusButton" fx:id="plusButton" focusTraversable="false" mnemonicParsing="false" onAction="#bPlusPressed" prefHeight="52.0" prefWidth="52.0" text="%plus-button">
+            <Button id="plusButton" fx:id="plusButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bPlusPressed" text="%plus-button" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="minusButton" fx:id="minusButton" focusTraversable="false" mnemonicParsing="false" onAction="#bMinusPressed" prefHeight="52.0" prefWidth="52.0" text="%minus-button" GridPane.columnIndex="1">
+            <Button id="minusButton" fx:id="minusButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bMinusPressed" text="%minus-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="multiplyButton" fx:id="multiplyButton" focusTraversable="false" mnemonicParsing="false" onAction="#bMultiplyPressed" prefHeight="52.0" prefWidth="52.0" text="%multiply-button" GridPane.columnIndex="2">
+            <Button id="multiplyButton" fx:id="multiplyButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bMultiplyPressed" text="%multiply-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="divButton" fx:id="divButton" focusTraversable="false" mnemonicParsing="false" onAction="#bDivPressed" prefHeight="52.0" prefWidth="52.0" text="%div-button" GridPane.columnIndex="3">
+            <Button id="divButton" fx:id="divButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bDivPressed" text="%div-button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="oneButton" fx:id="oneButton" focusTraversable="false" mnemonicParsing="false" onAction="#b1Pressed" prefHeight="52.0" prefWidth="52.0" text="%one-button" GridPane.rowIndex="1">
+            <Button id="oneButton" fx:id="oneButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b1Pressed" text="%one-button" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="twoButton" fx:id="twoButton" focusTraversable="false" mnemonicParsing="false" onAction="#b2Pressed" prefHeight="52.0" prefWidth="52.0" text="%two-button" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button id="twoButton" fx:id="twoButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b2Pressed" text="%two-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="threeButton" fx:id="threeButton" focusTraversable="false" mnemonicParsing="false" onAction="#b3Pressed" prefHeight="52.0" prefWidth="52.0" text="%three-button" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button id="threeButton" fx:id="threeButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b3Pressed" text="%three-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="fourButton" fx:id="fourButton" focusTraversable="false" mnemonicParsing="false" onAction="#b4Pressed" prefHeight="52.0" prefWidth="52.0" text="%four-button" GridPane.rowIndex="2">
+            <Button id="fourButton" fx:id="fourButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b4Pressed" text="%four-button" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="fiveButton" fx:id="fiveButton" focusTraversable="false" mnemonicParsing="false" onAction="#b5Pressed" prefHeight="52.0" prefWidth="52.0" text="%five-button" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button id="fiveButton" fx:id="fiveButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b5Pressed" text="%five-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="sixButton" fx:id="sixButton" focusTraversable="false" mnemonicParsing="false" onAction="#b6Pressed" prefHeight="52.0" prefWidth="52.0" text="%six-button" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button id="sixButton" fx:id="sixButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b6Pressed" text="%six-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="nineButton" fx:id="nineButton" focusTraversable="false" mnemonicParsing="false" onAction="#b9Pressed" prefHeight="52.0" prefWidth="52.0" text="%nine-button" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button id="nineButton" fx:id="nineButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b9Pressed" text="%nine-button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="sevenButton" fx:id="sevenButton" focusTraversable="false" mnemonicParsing="false" onAction="#b7Pressed" prefHeight="52.0" prefWidth="52.0" text="%seven-button" GridPane.rowIndex="3">
+            <Button id="sevenButton" fx:id="sevenButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b7Pressed" text="%seven-button" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="aightButton" fx:id="aightButton" focusTraversable="false" mnemonicParsing="false" onAction="#b8Pressed" prefHeight="52.0" prefWidth="52.0" text="%aight-button" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button id="aightButton" fx:id="aightButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b8Pressed" text="%aight-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="pointButton" fx:id="pointButton" focusTraversable="false" mnemonicParsing="false" onAction="#bPunktPressed" prefHeight="52.0" prefWidth="52.0" text="%punkt-button" GridPane.rowIndex="4">
+            <Button id="pointButton" fx:id="pointButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bPunktPressed" text="%punkt-button" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="zeroButton" fx:id="zeroButton" focusTraversable="false" mnemonicParsing="false" onAction="#b0Pressed" prefHeight="52.0" prefWidth="52.0" text="%zero-button" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button id="zeroButton" fx:id="zeroButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#b0Pressed" text="%zero-button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="enterButton" fx:id="enterButton" focusTraversable="false" mnemonicParsing="false" onAction="#bEnterPressed" prefHeight="232.0" prefWidth="52.0" text="%enter-button" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Button id="enterButton" fx:id="enterButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bEnterPressed" text="%enter-button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="25.0" right="25.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Button id="escButton" fx:id="escButton" focusTraversable="false" mnemonicParsing="false" onAction="#bESCPressed" text="%escButton" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button id="escButton" fx:id="escButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#bESCPressed" text="%escButton" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
             </Button>
-            <Button id="negateButton" fx:id="negateButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="235.0" layoutY="201.0" mnemonicParsing="false" onAction="#onNegatePressed" text="%negate-button" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <Button id="negateButton" fx:id="negateButton" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="235.0" layoutY="201.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNegatePressed" text="%negate-button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="16.0" />
                </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
             </Button>
          </children>
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
       </GridPane>
-      <MenuBar id="menuBar" fx:id="menuBar" focusTraversable="false">
+      <Label id="tempDisplay" fx:id="tempDisplay" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <MenuBar id="menuBar" fx:id="menuBar" focusTraversable="false" maxWidth="1.7976931348623157E308" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="NEVER">
         <menus>
           <Menu mnemonicParsing="false" text="%programm">
             <items>
-              <MenuItem id="close" fx:id="close" mnemonicParsing="false" onAction="#onClosePressed" text="%close" />
                   <MenuItem id="maximize" fx:id="maximize" mnemonicParsing="false" onAction="#onMaxPressed" text="%maximize" />
                   <MenuItem id="minimize" fx:id="minimize" mnemonicParsing="false" onAction="#onMinPressed" text="%minimize" />
+              <MenuItem id="close" fx:id="close" mnemonicParsing="false" onAction="#onClosePressed" text="%close" />
             </items>
           </Menu>
           <Menu id="settings" fx:id="settings" mnemonicParsing="false" text="%settings">
             <items>
-                  <Menu id="langMenu" fx:id="langMenu" mnemonicParsing="false" text="Language">
+                  <Menu id="langMenu" fx:id="langMenu" mnemonicParsing="false" text="%language">
                      <items>
                         <MenuItem id="english" fx:id="english" mnemonicParsing="false" onAction="#onEngPressed" text="%english" />
                     <MenuItem id="german" fx:id="german" mnemonicParsing="false" onAction="#onGerPressed" text="%german" />
                      </items>
                   </Menu>
-                  <Menu id="styleMenu" fx:id="styleMenu" mnemonicParsing="false" text="styleMenu">
+                  <Menu id="styleMenu" fx:id="styleMenu" mnemonicParsing="false" text="%styleMenu">
                     <items>
-                      <MenuItem id="whiteMode" fx:id="whiteMode" mnemonicParsing="false" onAction="#onWhiteModePressed" text="whiteMode" />
-                        <MenuItem id="darkMode" fx:id="darkMode" mnemonicParsing="false" onAction="#onDarkModePressed" text="darkMode" />
-                        <MenuItem id="greenMode" fx:id="greenMode" mnemonicParsing="false" onAction="#onGreenModePressed" text="greenMode" />
-                        <MenuItem id="redMode" fx:id="redMode" mnemonicParsing="false" onAction="#onRedModePressed" text="redMode" />
+                      <MenuItem id="whiteMode" fx:id="whiteMode" mnemonicParsing="false" onAction="#onWhiteModePressed" text="%white-mode" />
+                        <MenuItem id="darkMode" fx:id="darkMode" mnemonicParsing="false" onAction="#onDarkModePressed" text="%dark-mode" />
+                        <MenuItem id="greenMode" fx:id="greenMode" mnemonicParsing="false" onAction="#onGreenModePressed" text="%green-mode" />
+                        <MenuItem id="redMode" fx:id="redMode" mnemonicParsing="false" onAction="#onRedModePressed" text="%red-mode" />
                     </items>
                   </Menu>
             </items>
@@ -213,13 +227,5 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label id="tempDisplay" fx:id="tempDisplay" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" prefHeight="25.0" prefWidth="412.0" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="5.0" top="5.0" />
-         </GridPane.margin>
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
    </children>
 </GridPane>

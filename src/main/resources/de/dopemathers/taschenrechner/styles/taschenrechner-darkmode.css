@@ -43,84 +43,6 @@
         -fx-font-size: 20px;
 }
 
-.text-field:focused
-{
-	-fx-background-color:   #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-text-fill: white;
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-        -fx-font-family: "Comic Sans MS";
-        -fx-text-fill: linear-gradient(white, #d0d0d0);
-        -fx-font-size: 20px;
-    -fx-background-insets: 0 0 -1 0,0,1;
-         -fx-background-radius: 8,8,2;
-         -fx-padding: 15 15 15 15;
-}
-
-.menu-bar
-{
--fx-background-color:   #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-text-fill: white;
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-        -fx-font-family: "Comic Sans MS";
-        -fx-text-fill: linear-gradient(white, #d0d0d0);
-        -fx-font-size: 20px;
-}
-.menu-bar .menu-item
-{
--fx-background-color:   #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-text-fill: white;
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-        -fx-font-family: "Comic Sans MS";
-        -fx-text-fill: linear-gradient(white, #d0d0d0);
-        -fx-font-size: 20px;
-}
-.menu-bar:focused
-{
--fx-background-color:   #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-text-fill: white;
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-        -fx-font-family: "Comic Sans MS";
-        -fx-text-fill: linear-gradient(white, #d0d0d0);
-        -fx-font-size: 20px;
-}
-.menu-bar .menu-item:focused
-{
--fx-background-color:   #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-text-fill: white;
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-        -fx-font-family: "Comic Sans MS";
-        -fx-text-fill: linear-gradient(white, #d0d0d0);
-        -fx-font-size: 20px;
-}
-
-.menu-bar .menu
-{
--fx-background-color:   #090a0c,
-        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-        linear-gradient(#20262b, #191d22),
-        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-text-fill: white;
-        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-        -fx-font-family: "Comic Sans MS";
-        -fx-text-fill: linear-gradient(white, #d0d0d0);
-        -fx-font-size: 20px;
-}
-
 .text-area
 {
 -fx-background-color:   #090a0c,
@@ -136,3 +58,62 @@
  .text-area .content {
      -fx-background-color: #000000;
  }
+
+.menu
+{
+-fx-background-color:   #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+}
+.menu-bar {
+    -fx-accent: #151515;
+    	-fx-background-color:   #090a0c,
+            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+            linear-gradient(#20262b, #191d22),
+            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    	-fx-background-insets: 0 0 -1 0,0,1;
+            -fx-background-radius: 8,8,4;
+            -fx-padding: 0 0 0 0;
+        -fx-text-fill: white;
+            -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+            -fx-font-family: "Comic Sans MS";
+            -fx-text-fill: linear-gradient(white, #d0d0d0);
+            -fx-font-size: 20px;
+}
+
+.menu .label, .menu-item .label {
+    -fx-text-fill: #eee;
+}
+.menu:hover, .menu:focused, .menu:pressed {
+     -fx-background-color:
+            #090a0c,
+            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+            linear-gradient(#20262b, #191d22),
+            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+        -fx-background-insets: 0,1,2,0;
+        -fx-text-fill: white;
+        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+        -fx-font-family: "Comic Sans MS";
+        -fx-text-fill: linear-gradient(white, #d0d0d0);
+        -fx-font-size: 20px;
+}
+.menu-item:hover {
+     -fx-background-color:
+            #090a0c,
+            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+            linear-gradient(#20262b, #191d22),
+            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+        -fx-background-insets: 0,1,2,0;
+        -fx-text-fill: white;
+        -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+        -fx-font-family: "Comic Sans MS";
+        -fx-text-fill: linear-gradient(white, #d0d0d0);
+        -fx-font-size: 20px;
+}
+.menu-item {
+    -fx-background-color: transparent;
+}
+.context-menu {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+}
