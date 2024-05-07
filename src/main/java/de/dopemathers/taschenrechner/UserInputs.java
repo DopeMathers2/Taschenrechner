@@ -19,6 +19,8 @@ import java.util.ResourceBundle;
 public class UserInputs
 {
 
+    //Minus als vorzeichen muss permanent angezeigt werden noch implementieren
+
         //Mathelogic Variables
         private static String pMMD = "";
         private static boolean pMMDTriggered = false;
@@ -212,7 +214,73 @@ public class UserInputs
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if(key.getCode()==KeyCode.BACK_SPACE)
             {
-                System.out.println("You pressed Löschen");
+                if(secondSignTriggered)
+                {
+                    if (varTwo.length() > 0)
+                    {
+                        varTwo = varTwo.substring(0,varTwo.length()-1);
+
+                        if (secondSign.equalsIgnoreCase("+"))
+                        {
+                            tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
+                            calcDisplayPublic.setText(varTwo);
+                        }
+                        else
+                        {
+                            tempDisplayPublic.setText(firstSign+varOne+pMMD+secondSign+varTwo);
+                            calcDisplayPublic.setText(secondSign+varTwo);
+                        }
+                    }
+                    else
+                    {
+                        secondSign = "";
+                        secondSignTriggered = false;
+                        varTwo = "";
+                        pMMDTriggered = false;
+                        calcDisplayPublic.setText(pMMD);
+                        tempDisplayPublic.setText(firstSign+varOne+pMMD);
+
+                    }
+                }
+                else if(pMMDTriggered)
+                {
+                    varTwo = "";
+                    pMMDTriggered = false;
+                    calcDisplayPublic.setText(pMMD);
+                    tempDisplayPublic.setText(firstSign+varOne+pMMD);
+                }
+                else if (varOneTriggered)
+                {
+                    pMMD = "";
+                    varOneTriggered = false;
+                    if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                    else calcDisplayPublic.setText(firstSign+varOne);
+                    tempDisplayPublic.setText(firstSign+varOne);
+                }
+                else if (firstSignTriggered)
+                {
+                    if (varOne.length() > 0 )
+                    {
+                        varOne = varOne.substring(0,varOne.length()-1);
+                        if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                        else calcDisplayPublic.setText(firstSign+varOne);
+                        tempDisplayPublic.setText(firstSign+varOne);
+                    }
+                    else
+                    {
+                        varOne = "";
+                        firstSignTriggered = false;
+                        if(firstSign.equalsIgnoreCase("-")) calcDisplayPublic.setText(firstSign);
+                        tempDisplayPublic.setText(firstSign);
+                    }
+                }
+                else
+                {
+                    firstSign = "+";
+                    calcDisplayPublic.setText("");
+                    tempDisplayPublic.setText("");
+                }
+
             }
         });
 
@@ -460,60 +528,6 @@ public class UserInputs
         writePoint();
     }
 
-    private boolean isDigit(String num)
-    {
-        if(num.equalsIgnoreCase("1") || num.equalsIgnoreCase("2")
-                || num.equalsIgnoreCase("3") || num.equalsIgnoreCase("4")
-                || num.equalsIgnoreCase("5") || num.equalsIgnoreCase("6")
-                || num.equalsIgnoreCase("7") || num.equalsIgnoreCase("8")
-                || num.equalsIgnoreCase("9") || num.equalsIgnoreCase("0"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
-
-    private boolean isPoint(String num)
-    {
-        if (num.equalsIgnoreCase(".") || num.equalsIgnoreCase(","))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private boolean isMathsign(String num)
-    {
-        if(num.equalsIgnoreCase("+") || num.equalsIgnoreCase("-")
-                || num.equalsIgnoreCase("*") || num.equalsIgnoreCase("/"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private boolean isEnter(String num)
-    {
-        if (num.equalsIgnoreCase("="))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     private static void mathsignPressed(String sign)
     {
         if (pMMDTriggered == false)
@@ -554,7 +568,8 @@ public class UserInputs
                 {
                     varOne = varOne + ".";
                     pointTriggered = true;
-                    calcDisplayPublic.setText(varOne);
+                    if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                    else calcDisplayPublic.setText(firstSign+varOne);
                     tempDisplayPublic.setText(firstSign+varOne);
                 }
                 else
@@ -562,7 +577,8 @@ public class UserInputs
                     varOne = "0";
                     varOne = varOne + ".";
                     pointTriggered = true;
-                    calcDisplayPublic.setText(varOne);
+                    if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                    else calcDisplayPublic.setText(firstSign+varOne);
                     tempDisplayPublic.setText(firstSign+varOne);
                 }
             }
@@ -572,7 +588,8 @@ public class UserInputs
                 {
                     varTwo = varTwo + ".";
                     pointTriggered = true;
-                    calcDisplayPublic.setText(varTwo);
+                    if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varTwo);
+                    else calcDisplayPublic.setText(secondSign+varTwo);
                     tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
                 }
                 else
@@ -580,7 +597,8 @@ public class UserInputs
                     varTwo = "0";
                     varTwo = varTwo + ".";
                     pointTriggered = true;
-                    calcDisplayPublic.setText(varTwo);
+                    if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varTwo);
+                    else calcDisplayPublic.setText(secondSign+varTwo);
                     tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
                 }
             }
@@ -618,7 +636,8 @@ public class UserInputs
             if(varOneTriggered == false)
             {
                 varOne = varOne + button;
-                calcDisplayPublic.setText(varOne);
+                if(firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                else calcDisplayPublic.setText(firstSign+varOne);
                 tempDisplayPublic.setText(firstSign+varOne);
             }
             else
@@ -626,15 +645,20 @@ public class UserInputs
                 if(pMMD.equalsIgnoreCase(""))
                 {
                     varOne = varOne + button;
-                    calcDisplayPublic.setText(varOne);
+                    if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                    else calcDisplayPublic.setText(firstSign+varOne);
                     tempDisplayPublic.setText(firstSign+varOne);
                 }
                 else
                 {
                     varTwo = varTwo + button;
-                    calcDisplayPublic.setText(varTwo);
+
+                    if (secondSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varTwo);
+                    else calcDisplayPublic.setText(secondSign+varTwo);
+
                     if (secondSign.equalsIgnoreCase("+"))tempDisplayPublic.setText(firstSign+varOne+pMMD+varTwo);
-                    if (secondSign.equalsIgnoreCase("-"))tempDisplayPublic.setText(firstSign+varOne+pMMD+secondSign+varTwo);
+                    else tempDisplayPublic.setText(firstSign+varOne+pMMD+secondSign+varTwo);
+                    secondSignTriggered = true;
                     pMMDTriggered = true;
                 }
 
@@ -658,28 +682,32 @@ public class UserInputs
             {
                 temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
-                calcDisplayPublic.setText(varOne);
+                if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                else calcDisplayPublic.setText(firstSign+varOne);
                 tempDisplayPublic.setText(firstSign+varOne);
             }
             else if (pMMD.equalsIgnoreCase("-"))
             {
                 temp = clac.substract(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
-                calcDisplayPublic.setText(varOne);
+                if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                else calcDisplayPublic.setText(firstSign+varOne);
                 tempDisplayPublic.setText(firstSign+varOne);
             }
             else if (pMMD.equalsIgnoreCase("*"))
             {
                 temp = clac.multiply(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
-                calcDisplayPublic.setText(varOne);
+                if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                else calcDisplayPublic.setText(firstSign+varOne);
                 tempDisplayPublic.setText(firstSign+varOne);
             }
             else if (pMMD.equalsIgnoreCase("/"))
             {
                 temp = clac.division(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
-                calcDisplayPublic.setText(varOne);
+                if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
+                else calcDisplayPublic.setText(firstSign+varOne);
                 tempDisplayPublic.setText(firstSign+varOne);
             }
 
