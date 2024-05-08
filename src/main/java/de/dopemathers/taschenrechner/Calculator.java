@@ -166,7 +166,8 @@ public class Calculator extends Application
 
     public static void maxApp()
     {
-        stg.setFullScreen(true);
+        if (stg.fullScreenProperty().get()) stg.setFullScreen(false);
+        else stg.setFullScreen(true);
     }
 
     public static void minApp()

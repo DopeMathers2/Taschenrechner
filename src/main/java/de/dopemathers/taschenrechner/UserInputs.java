@@ -380,7 +380,7 @@ public class UserInputs
         @FXML
         private void onMaxPressed()
         {
-            Calculator.maxApp(); // funktioniert, möglichkeit aus Vollbild zu kommen einbauen
+            Calculator.maxApp();
         }
 
         @FXML
@@ -404,6 +404,7 @@ public class UserInputs
             }
             else
             {
+                if (varOneTriggered){
                 if (secondSign.equalsIgnoreCase("+"))
                 {
                     secondSign = "-";
@@ -415,7 +416,7 @@ public class UserInputs
                     secondSign = "+";
                     calcDisplay.setText(pMMD);
                     tempDisplay.setText(firstSign+varOne+pMMD);
-                }
+                }}
             }
 
         }
@@ -677,45 +678,53 @@ public class UserInputs
         if (varTwoTriggered)
         {
             if (secondSign.equalsIgnoreCase("-")) varTwo = secondSign + varTwo;
+            if (firstSign.equalsIgnoreCase("-")) varOne = firstSign + varOne;
 
             if (pMMD.equalsIgnoreCase("+"))
             {
                 temp = clac.addition(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
+                firstSign = "";
                 if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
-                else calcDisplayPublic.setText(firstSign+varOne);
-                tempDisplayPublic.setText(firstSign+varOne);
+                else calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(varOne);
             }
             else if (pMMD.equalsIgnoreCase("-"))
             {
                 temp = clac.substract(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
+                firstSign = "";
                 if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
-                else calcDisplayPublic.setText(firstSign+varOne);
-                tempDisplayPublic.setText(firstSign+varOne);
+                else calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(varOne);
             }
             else if (pMMD.equalsIgnoreCase("*"))
             {
                 temp = clac.multiply(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
-                if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
-                else calcDisplayPublic.setText(firstSign+varOne);
-                tempDisplayPublic.setText(firstSign+varOne);
+                firstSign = "";
+                calcDisplayPublic.setText(varOne);
+                //if (firstSign.equalsIgnoreCase("-")) firstSign = "+";
+                tempDisplayPublic.setText(varOne);
             }
             else if (pMMD.equalsIgnoreCase("/"))
             {
                 temp = clac.division(Double.parseDouble(varOne),Double.parseDouble(varTwo));
                 varOne = temp.toString();
+                firstSign = "";
                 if (firstSign.equalsIgnoreCase("+"))calcDisplayPublic.setText(varOne);
-                else calcDisplayPublic.setText(firstSign+varOne);
-                tempDisplayPublic.setText(firstSign+varOne);
+                else calcDisplayPublic.setText(varOne);
+                tempDisplayPublic.setText(varOne);
             }
 
             pMMDTriggered = false;
             pMMD = "";
+            varOneTriggered = false;
             varTwoTriggered = false;
             varTwo = "";
             pointTriggered = false;
+            secondSign = "+";
+            secondSignTriggered = false;
 
         }
     }
