@@ -6,4 +6,4 @@ I'm still learning so feel free to report issus.
 
 But only simple * / - + arethmetics, no () implemented. 
 
-Installer: https://github.com/DopeMathers2/Taschenrechner/releases/download/v.0.5.0/Nova-Calculator-0.5.exe
+Installer: https://github.com/DopeMathers2/Taschenrechner/releases/download/v0.5.1/Nova-Calculator-0.5.1.exe
