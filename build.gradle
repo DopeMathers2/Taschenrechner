@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'de.dopemathers'
-version '0.5-ALPHA'
+version '0.5'
 
 repositories {
     mavenCentral()
@@ -45,13 +45,32 @@ test {
 }
 
 jlink {
+
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+
+    jpackage {
+        installerType = 'exe'
+        imageOptions += ['--icon', 'src/main/resources/de/dopemathers/taschenrechner/images/icon/icon512.ico']
+        installerOptions = [
+                '--win-per-user-install', // Install only for current user
+                '--name', 'Nova-Calculator', // installer name
+                '--description', 'a little basic calculator',
+                '--copyright', 'OpenSource 2024',
+                '--vendor', 'dopemathers',
+                '--win-dir-chooser',
+                '--win-menu', '--win-shortcut'
+        ]
+
+
+    }
+
     launcher {
-        name = 'app'
+        name = 'Nova-Calculator'
     }
 }
 
 jlinkZip {
     group = 'distribution'
 }
+
